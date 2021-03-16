@@ -1,0 +1,3 @@
+/home/up/Documents/iwlwifi//dvm/iwldvm.ko
+/home/up/Documents/iwlwifi//dvm/main.o /home/up/Documents/iwlwifi//dvm/rs.o /home/up/Documents/iwlwifi//dvm/mac80211.o /home/up/Documents/iwlwifi//dvm/ucode.o /home/up/Documents/iwlwifi//dvm/tx.o /home/up/Documents/iwlwifi//dvm/lib.o /home/up/Documents/iwlwifi//dvm/calib.o /home/up/Documents/iwlwifi//dvm/tt.o /home/up/Documents/iwlwifi//dvm/sta.o /home/up/Documents/iwlwifi//dvm/rx.o /home/up/Documents/iwlwifi//dvm/power.o /home/up/Documents/iwlwifi//dvm/scan.o /home/up/Documents/iwlwifi//dvm/connector.o /home/up/Documents/iwlwifi//dvm/rxon.o /home/up/Documents/iwlwifi//dvm/devices.o /home/up/Documents/iwlwifi//dvm/led.o /home/up/Documents/iwlwifi//dvm/debugfs.o
+
