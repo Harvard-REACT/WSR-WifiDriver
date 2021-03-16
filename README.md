@@ -159,7 +159,28 @@ $ sudo linux-80211n-csitool-supplementary/netlink/log_to_file csi.dat
 ```
 
 ## Updating MAC IDs in the WSR Toolbox config files
-1. Use the mac_to_string code to convert the mac_id into string (WIP or add capability in the WSR toolbox) 
+1. Add the MAC_ID in the config file for the robot. If its a RX_SAR_robot then use the field MAC_ID :
+```
+    "MAC_ID":{
+        "desc":"MAC ID of RX_SAR robot",
+        "value":"00:21:6A:C5:FC:0"
+    },
+``` 
+
+and if its a TX_Neighbor robot, then use the field input_TX_channel_csi_fn. e.g
+```
+"input_TX_channel_csi_fn":{
+        "desc":"Forward channel csi File for each of the neighboring TX robots",
+        "value":{
+            "tx_0":{
+                "mac_id":"00:16:EA:12:34:56",
+                "csi_fn":"/REACT-Projects/WSR-Toolbox-cpp/data/LOS_2D_1_RX_1_TX_RX_P0_TX_P1/2D_TX_dataset_csi_rx_tx/csi_tx_2021-03-04_154912.dat"
+            },
+        }
+```
+
+
+
 
 
 
