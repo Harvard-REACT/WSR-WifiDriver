@@ -1,0 +1,857 @@
+    1  uname -r
+    2  sudo apt-mark hold 4.15.0-45-generic
+    3  sudo apt update
+    4  sudo apt upgarde
+    5  sudo apt upgrade 
+    6  sudo apt reboot
+    7  sudo reboot
+    8  sudo apt-get install gcc make linux-headers-$(uname -r) git-core
+    9  sudo poweroff
+   10  iwconfig
+   11  echo iface wlp1s0 inet manual | sudo tee -a /etc/network/interfaces
+   12  sudo service network-manager  restart
+   13  echo blacklist iwldvm | sudo tee -a /etc/modprobe.d/csitool.conf
+   14  echo blacklist iwlwifi | sudo tee -a /etc/modprobe.d/csitool.conf
+   15  cd Documents/
+   16  sudo vi /etc/default/grub
+   17  sudo apt-get install vim
+   18  sudo vi /etc/default/grub
+   19  sudo update-grub
+   20  sudo vi /etc/default/grub
+   21  sudo update-grub
+   22  sudo reboot
+   23  info -f grub -n 'Simple configuration'
+   24  sudo apt remove --purge linux-image-4.15.0-74-generic linux-headers-4.15.0-74*
+   25  sudo apt-mark hold 4.15.0-45-generic
+   26  sudo apt update
+   27  sudo reboot
+   28  sudo update-grub
+   29  sudo rm /boot/vmlinuz-4.15.0-74*
+   30  sudo update-grub
+   31  sudo reboot
+   32  uname -a
+   33  cd /lib/modules/4.15.0-45-generic/kernel/drivers/net/wireless/intel/iwlwifi/
+   34  ls
+   35  sudo cp iwlwifi.ko iwlwifi.ko.bak
+   36  cd mvm/
+   37  ls
+   38  sudo cp iwlmvm.ko iwlmvm.ko.bak
+   39  cd ..
+   40  cd dvm
+   41  ls
+   42  sudo cp iwldvm.ko iwldvm.ko.bak
+   43  ls
+   44  ls
+   45  lsblk
+   46  cd Documents/
+   47  sudo apt --purge autoremove
+   48  uname -r
+   49  sudo make -C /lib/modules/4.15.0-45-generic/build M=~/Documents/iwlwifi/ modules
+   50  sudo make -j4 -C /lib/modules/4.15.0-45-generic/build M=~/Documents/iwlwifi/ modules
+   51  sudo cp iwlwifi/iwlwifi.ko /lib/modules/4.15.0-45-generic/kernel/drivers/net/wireless/intel/iwlwifi
+   52  sudo cp iwlwifi/dvm/iwldvm.ko /lib/modules/4.15.0-45-generic/kernel/drivers/net/wireless/intel/iwlwifi/mvm
+   53  sudo cp iwlwifi/mvm/iwlmvm.ko /lib/modules/4.15.0-45-generic/kernel/drivers/net/wireless/intel/iwlwifi/mvm
+   54  git clone https://github.com/dhalperi/linux-80211n-csitool-supplementary.git
+   55  depmod
+   56  sudo depmod
+   57  for file in /lib/firmware/iwlwifi-5000-*.ucode; do sudo mv $file $file.orig; done
+   58  sudo cp linux-80211n-csitool-supplementary/firmware/iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/
+   59  sudo ln -s iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/iwlwifi-5000-2.ucode
+   60  cd linux-80211n-csitool-supplementary/netlink/
+   61  make -C
+   62  make
+   63  cp log_to_file ~/
+   64  cd ~/Documents/
+   65  ls
+   66  cd EW-7811UTC_UAC_DAC_USC_Linux_Driver_1.0.2.4/
+   67  make modules
+   68  make -j4 all
+   69  ls
+   70  cd ..
+   71  ls
+   72  cd EW-7811UTC_UAC_DAC_USC_Linux_Driver_1.0.2.4/
+   73  ls
+   74  cd rtl8821AU_WiFi_linux_v5.3.4_28226.20180614_COEX20171103-6c6d/
+   75  make all
+   76  make -j4 all
+   77  sudo make install 
+   78  sudo vi /etc/default/grub
+   79  sudo update-grub
+   80  sudo reboot
+   81  iwconfig
+   82  ssh turbot@192.168.1.3
+   83  ssh turbot@192.168.1.7
+   84  cd ~/.ssh/
+   85  ls
+   86  ssh-keygen -t rsa
+   87  ls
+   88  cat id_rsa.pub
+   89  sudo killall nautilus 
+   90  nautilus
+   91  cd /media/up/
+   92  cd ..
+   93  ls
+   94  vi ~/setup_both_cmu.sh 
+   95  ls
+   96  cd
+   97  sudo chmod +x setup_both_cmu.sh 
+   98  ls -al
+   99  ./setup_both_cmu.sh 
+  100  iwconfig
+  101  vi setup_both_cmu.sh 
+  102  dmesg 
+  103  ping 192.168.1.1
+  104  ping 192.168.1.28
+  105  ping 192.168.1.29
+  106  ping 192.168.1.23
+  107  ping 192.168.1.7
+  108  sudo reboot
+  109  ifconfig
+  110  ./setup_both_cmu.sh 
+  111  iwconfig
+  112  sudo iwconfig wlp1s0 txpower 25
+  113  iwconfig
+  114  sudo iwconfig mon0 txpower 25
+  115  iwconfig
+  116  sudo iwconfig mon0 txpower 20
+  117  iwconfig
+  118  dmesg -wH
+  119  iwconfig
+  120  sudo iw reg set BO
+  121  sudo iwconfig mon0 txpower 20
+  122  IWCOFNIG
+  123  iwconfig
+  124  sudo iwconfig wlp1s0 txpower 20
+  125  iwconfig
+  126  logout
+  127  vi ~/.ssh/authorized_keys 
+  128  logout
+  129  sudo apt install chrony
+  130  sudo vi /etc/chrony/conf
+  131  sudo vi /etc/chrony/chrony.conf 
+  132  sudo poweroff
+  133  sudo apt install chrony
+  134  ls
+  135  ifconfig
+  136  sudo vi /etc/chrony/chrony.conf 
+  137  sudo service chrony restart
+  138  chronyc
+  139  chronyc tracking
+  140  watch chronyc tracking
+  141  logout
+  142  watch chronyc tracking
+  143  logout
+  144  sudo vi /etc/chrony/chrony.conf 
+  145  watch chronyc tracking
+  146  sudo vi /etc/chrony/chrony.conf 
+  147  sudo service chrony restart
+  148  watch chronyc tracking
+  149  sudo vi /etc/chrony/chrony.conf 
+  150  watch -n 0.1 date
+  151  watch chronyc tracking
+  152  sudo poweroff
+  153  watch chronyc tracking
+  154  sudo chronyc -a makestep
+  155  watch chronyc tracking
+  156  cd adaptivenw/
+  157  sudo chmod +x startdata.sh
+  158  sudo chmod +x stopdata.sh 
+  159  vi startdata
+  160  vi startdata.sh 
+  161  ls
+  162  vi stopdata.sh 
+  163  ls
+  164  cd 
+  165  ls
+  166  ls -al
+  167  cd adaptivenw/
+  168  ./startdata.sh 
+  169  cd ..
+  170  cd adaptivenw/
+  171  vi startdata
+  172  vi startdata.sh 
+  173  vi stopdata.sh 
+  174  ./startdata.sh 
+  175  ps -fe | grep log_t
+  176  ./stopdata.sh 
+  177  ps -fe | grep log_t
+  178  vi startdata.sh 
+  179  cd csi_data/
+  180  ls
+  181  cd ..
+  182  ./setup_both_cmu.sh 161 HT20
+  183  iwconfig
+  184  ps -fe | grep log_t
+  185  dmesg
+  186  dmesg -wH
+  187  iwconfig
+  188  scp -r up@192.168.1.21:~/Documents/lorcon-old /home/up/Documents/
+  189  ls
+  190  cd Documents/
+  191  ls
+  192  cd lorcon-old/
+  193  make -j4
+  194  sudo make install
+  195  cd ../linux-80211n-csitool-supplementary/
+  196  cd injection/
+  197  make
+  198  cp random_packets ~/
+  199  cd 
+  200  sudo ./random_packets 1000000 29 1 10000
+  201  sudo ./log_to_file test.dat
+  202  ps -eo pid,ppid,ni,comm
+  203  sudo ./log_to_file test.dat
+  204  sudo nice -n -20 ./log_to_file test.dat
+  205  cd ~/Documents/linux-80211n-csitool-supplementary/injection/
+  206  cd ..
+  207  vi netlink/log_to_file
+  208  cd
+  209  cd ~/Documents/linux-80211n-csitool-supplementary/injection/
+  210  cd ..
+  211  cd netlink/
+  212  vi log_to_file.c 
+  213  sudo ~/log_to_file ~/test.dat
+  214  ps -fe | grep log_to
+  215  sudo ~/adaptivenw/stopdata.sh 
+  216  sudo poweroff
+  217  scp -r up@192.168.1.21:~/adaptivenw ./
+  218  ls -l
+  219  scp -r up@192.168.1.21:/home/up/mocap_data_cpp/ ./
+  220  cd mocap_data_cpp/NatnetCSI/
+  221  make
+  222  vim ~/.bashrc 
+  223  source ~/.bash
+  224  source ~/.bashrc 
+  225  ./build/raw_mocap_data 
+  226  clear
+  227  vim ~/adaptivenw/
+  228  cd ~/
+  229  sudo ./random_packets 1000000 29 1 10000
+  230  dmesg -wH
+  231  clear
+  232  ./setup_both_cmu.sh 161 HT20
+  233  sudo ./random_packets 1000000 29 1 10000
+  234  cd adaptivenw/
+  235  vim startdata.sh 
+  236  ./startdata.sh 
+  237  ls -l
+  238  exit
+  239  cd adaptivenw/
+  240  ls -l 
+  241  ls -l csi_data/
+  242  rm -rf csi_data/csi_b.dat 
+  243  clear
+  244  ./stopdata.sh 
+  245  exit
+  246  clear
+  247  watch -n1 chronyc tracking 
+  248  sudo ntpdate 192.168.1.40
+  249  watch -n1 chronyc tracking 
+  250  sudo ~/log_to_file ~/test.dat
+  251  scp /home/up/test.dat react@192.168.1.28:~/
+  252  sudo ~/log_to_file ~/test.dat
+  253  scp /home/up/test.dat react@192.168.1.28:~/
+  254  vim ~/Documents/linux-80211n-csitool-supplementary/netlink/
+  255  sudo vim ~/Documents/linux-80211n-csitool-supplementary/netlink/
+  256  cd ~/Documents/linux-80211n-csitool-supplementary/netlink/
+  257  make
+  258  cp log_to_file ~/
+  259  cd ~/
+  260  cd adaptivenw/
+  261  clear
+  262  ./startdata.sh 
+  263  scp -r csi_data/csi_b.dat  react@192.168.1.28:~/
+  264  watch -n1 chronyc tracking 
+  265  ls -l csi_data/
+  266  scp -r csi_data/csi_b.dat react@192.168.1.4:~/
+  267  scp -r csi_data/csi_b.dat react@192.168.1.28:~/
+  268  ls -l csi_data/csi_b.dat 
+  269  rm -rf csi_data/csi_b.dat 
+  270  ./startdata.sh 
+  271  eit
+  272  exit
+  273  scp -r adaptivenw/csi_data/csi_b.dat react@192.168.1.28:~/
+  274  ./adaptivenw/startdata.sh 
+  275  ./adaptivenw/stopdata.sh 
+  276  ./adaptivenw/startdata.sh 
+  277  ./adaptivenw/stopdata.sh 
+  278  ./adaptivenw/startdata.sh 
+  279  ./adaptivenw/stopdata.sh 
+  280  ./adaptivenw/startdata.sh 
+  281  ./adaptivenw/stopdata.sh 
+  282  watch -n1 chronyc tracking 
+  283  dmesg -wH
+  284  ./adaptivenw/startdata.sh 
+  285  ./adaptivenw/stopdata.sh 
+  286  ./adaptivenw/startdata.sh 
+  287  iwconfig 
+  288  ./setup_both_cmu.sh 161 HT20
+  289  ./adaptivenw/startdata.sh 
+  290  iwconfig
+  291  watch -n1 chronyc tracking 
+  292  cd adaptivenw/
+  293  ./startdata.sh 
+  294  ls
+  295  vi stopdata.sh 
+  296  vi startdata.sh 
+  297  ./startdata.sh 
+  298  ls
+  299  logout
+  300  adaptivenw/stopdata.sh 
+  301  vi adaptivenw/stopdata.sh 
+  302  ps -fe | grep log_to_file 
+  303  sudo killall log_to_file 
+  304  cd adaptivenw/
+  305  ls
+  306  rm csi_data/csi_b.dat 
+  307  cd adaptivenw/
+  308  ./stopdata.sh 
+  309  dmesg -wH
+  310  vim startdata.sh 
+  311  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  312  iwconfig 
+  313  ./setup_both_cmu.sh 161 HT20
+  314  cd ../
+  315  ./setup_both_cmu.sh 161 HT20
+  316  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  317  ps -fe | grep log_
+  318  ./adaptivenw/stopdata.sh 
+  319  up
+  320  ps -fe | grep log_
+  321  cd adaptivenw/
+  322  ./startdata.sh 
+  323  ./stopdata.sh 
+  324  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  325  sudo ./random_packets 100000 29 1 10000
+  326  exit
+  327  dmesg 
+  328  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  329  up
+  330  vim Documents/linux-80211n-csitool-supplementary/netlink/log_to_file.c 
+  331  make
+  332  ls -l
+  333  cd Documents/linux-80211n-csitool-supplementary/netlink/
+  334  make
+  335  cp log_to_file ~/
+  336  cd ~/
+  337  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  338  free -m
+  339  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  340  iwconfig
+  341  ./setup_both_cmu.sh 161 HT20
+  342  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  343  rm ~/test.dat 
+  344  lsblk
+  345  df -BM
+  346  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  347  dmesg
+  348  sudo ./random_packets 1000000 29 1 10000
+  349  sudo ./random_packets 1000000 29 1 100
+  350  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  351  cd adaptivenw/
+  352  ./startdata.sh 
+  353  ./stopdata.sh 
+  354  ./startdata.sh 
+  355  watch -n1 chronyc tracking 
+  356  history | grep chrony
+  357  sudo systemctl restart chrony.service
+  358  watch -n1 chronyc tracking 
+  359  ./startdata.sh 
+  360  ./stopdata.sh 
+  361  ./startdata.sh 
+  362  ./stopdata.sh 
+  363  ./startdata.sh 
+  364  ./stopdata.sh 
+  365  ./startdata.sh 
+  366  ./stopdata.sh 
+  367  ./startdata.sh 
+  368  watch -n1 chronyc tracking 
+  369  dmesg -wH
+  370  exit
+  371  sudo poweroff 
+  372  ./setup_both_cmu.sh 161 HT20
+  373  watch -n1 chronyc tracking
+  374  ./setup_both_cmu.sh 161 HT20
+  375  ls -l adaptivenw/csi_data/csi_b.dat 
+  376  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  377  ./setup_both_cmu.sh 161 HT20
+  378  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  379  ./setup_both_cmu.sh 161 HT20
+  380  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  381  ./setup_both_cmu.sh 161 HT20
+  382  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  383  dmesg 
+  384  dmesg -wH
+  385  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  386  sudo reboot now
+  387  sudo poweroff 
+  388  sudo ./random_packets 100000 29 1 50
+  389  sudo ./random_packets 100000 29 1 500
+  390  sudo ./random_packets 100000 29 1 1000
+  391  exit
+  392  ./setup_both_cmu.sh 161 HT20
+  393  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  394  ./setup_both_cmu.sh 161 HT20
+  395  echo "up" | sudo -S /home/up/log_to_file /home/up/adaptivenw/csi_data/csi_b.dat
+  396  watch -n1 chronyc tracking
+  397  ./~setup_both_cmu.sh 161 HT20
+  398  ./setup_both_cmu.sh 161 HT20
+  399  sudo poweroff 
+  400  watch -n1 chronyc tracking
+  401  ./setup_both_cmu.sh 161 HT20
+  402  /home/up/mocap_data_cpp/NatnetCSI/build/raw_mocap_data
+  403  /home/up/mocap_data_cpp/NatnetCSI/build/raw_mocap_data 192.168.1.14
+  404  vim adaptivenw/startdata.sh 
+  405  cat adaptivenw/startdata.sh 
+  406  /home/up/mocap_data_cpp/NatnetCSI/build/raw_mocap_data 192.168.1.14 192.168.1.22
+  407  vim adaptivenw/stopdata.sh 
+  408  sudo poweroff 
+  409  watch -n1 chronyc tracking
+  410  ./setup_both_cmu.sh 161 HT20
+  411  dmesg -wH
+  412  -wH
+  413  dmesg -wH
+  414  cd Documents/iwlwifi/
+  415  grep -rnw ./ -e 'headroom'
+  416  cd dvm
+  417  vi rx.c
+  418  grep -rnw ./ -e 'iwlagn_tx_skb'
+  419  vi tx.c
+  420  ./setup_both_cmu.sh 108 HT20
+  421  cd ~/
+  422  ./setup_both_cmu.sh 108 HT20
+  423  sudo poweroff 
+  424  ./setup_both_cmu.sh 161 HT20
+  425  dmesg -wH
+  426  ./setup_both_cmu.sh 161 HT20
+  427  dmesg -wH
+  428  sudo ./random_packets 100000 29 1 1000
+  429  ./setup_both_cmu.sh 161 HT20
+  430  sudo ./random_packets 100 29 1 10000
+  431  ./setup_both_cmu.sh 161 HT20
+  432  sudo poweroff 
+  433  ./setup_both_cmu.sh 161 HT20
+  434  dmesg -wH
+  435  ls -l adaptivenw/csi_data/csi_b.dat 
+  436  rm -rf adaptivenw/csi_data/csi_b.dat 
+  437  ls -l adaptivenw/csi_data/csi_b.dat 
+  438  ./setup_both_cmu.sh 161 HT20
+  439  rm -rf adaptivenw/csi_data/csi_b.dat 
+  440  ./adaptivenw/startdata.sh 
+  441  ls -l adaptivenw/csi_data/csi_b.dat 
+  442  ./setup_both_cmu.sh 108 HT20
+  443  ./adaptivenw/startdata.sh 
+  444  ls -l adaptivenw/csi_data/csi_b.dat 
+  445  dmesg -wH
+  446  ls -l adaptivenw/csi_data/csi_b.dat 
+  447  ./setup_both_cmu.sh 161 HT20
+  448  ./setup_both_cmu.sh 104 HT20
+  449  ./setup_both_cmu.sh 108 HT20
+  450  sudo poweroff 
+  451  ./setup_both_cmu.sh 108 HT20
+  452  vim adaptivenw/startdata.sh 
+  453  cd Documents/linux-80211n-csitool-supplementary/netlink/
+  454  vim log_to_file.c 
+  455  make
+  456  cp log_to_file ~/
+  457  cd ~
+  458  vim adaptivenw/startdata.sh 
+  459  sudo poweroff 
+  460  vim adaptivenw/startdata.sh 
+  461  sudo shutdown
+  462  watch -n1 chronyc tracking
+  463  vim adaptivenw/startdata.sh 
+  464  sudo poweroff 
+  465  vim adaptivenw/startdata.sh 
+  466  ls -l adaptivenw/csi_data/csi_b.dat 
+  467  vim adaptivenw/startdata.sh 
+  468  watch -n1 chronyc tracking
+  469  vim adaptivenw/stopdata.sh 
+  470  cat adaptivenw/startdata
+  471  cat adaptivenw/startdata.sh 
+  472  /home/up/mocap_data_cpp/NatnetCSI/build/raw_mocap_data 192.168.1.14 192.168.1.22
+  473  watch -n1 chronyc tracking
+  474  sudo poweroff 
+  475  sudo -S /home/up/setup_both_cmu.sh 124 HT20
+  476  iwconfig 
+  477  sudo -S /home/up/setup_both_cmu.sh 112 HT20
+  478  sudo -S /home/up/setup_both_cmu.sh 140 HT20
+  479  dmesg -wH
+  480  sudo -S /home/up/setup_both_cmu.sh 140 HT20
+  481  dmesg -wH
+  482  sudo -S /home/up/setup_both_cmu.sh 132 HT20
+  483  dmesg -wH
+  484  iwconfig 
+  485  sudo -S /home/up/setup_both_cmu.sh 124 HT20
+  486  dmesg -H
+  487  dmesg -wH
+  488  sudo -S /home/up/setup_both_cmu.sh 124 HT20
+  489  dmesg -wH
+  490  iwconfig
+  491  iwconfig 
+  492  sudo poweroff
+  493  sudo -S /home/up/setup_both_cmu.sh 124 HT20
+  494  sudo poweroff 
+  495  sudo -S /home/up/setup_both_cmu.sh 124 HT20
+  496  sudo ./random_packets 100 29 1 10000
+  497  vim adaptivenw/startdata.sh 
+  498  ./adaptivenw/startdata.sh 
+  499  ./adaptivenw/stopdata.sh 
+  500  ./adaptivenw/stopdata.sh
+  501  ps -f | grep random
+  502  ps -f | grep random_pacets
+  503  ps -ef | grep rndom_packets
+  504  ps -ef | grep random_packets
+  505  kill -9 2090
+  506  sudo kill 9 2090
+  507  vim adaptivenw/stopdata.sh 
+  508  ./adaptivenw/startdata.sh 
+  509  ./adaptivenw/sopdata.sh
+  510  ./adaptivenw/topdata.sh
+  511  ./adaptivenw/stopdata.sh
+  512  watch -n1 chronyc tracking
+  513  vim adaptivenw/startdata.sh 
+  514  sudo poweroff 
+  515  sudo -S /home/up/setup_both_cmu.sh 124 HT20
+  516  dmesg -wH
+  517  ./adaptivenw/stopdata.sh 
+  518  vi ~/Documents/iwlwifi/
+  519  vi ~/Documents/iwlwifi/dvm/
+  520  cd ~/Documents/iwlwifi/
+  521  grep -rnw ./ -e 'headroom too small'
+  522  grep -rnw= ./ -e 'headroom too small'
+  523  grep -rn ./ -e 'headroom too small'
+  524  grep -rn ./ -e '*headroom too small*'
+  525  vi dvm/rx.c
+  526  grep -rn ./ -e 'iwlagn_tx_skb'
+  527  vi dvm/mac80211.c 
+  528  vi dvm/rx.c
+  529  cd ~/
+  530  ls -l adaptivenw/csi_data/csi_b.dat 
+  531  watch -n1 chronyc tracking 
+  532  sudo -S /home/up/setup_both_cmu.sh 124 HT20
+  533  sudo reboot now
+  534  sudo -S /home/up/setup_both_cmu.sh 124 HT20
+  535  dmesg -wH
+  536  sudo poweroff
+  537  sudo poweroff 
+  538  sudo -S /home/up/setup_both_cmu.sh 124 HT20
+  539  sudo reboot now
+  540  sudo -S /home/up/setup_both_cmu.sh 124 HT20
+  541  sudo -S /home/up/setup_both_cmu.sh 108 HT20
+  542  sudo -S /home/up/setup_both_cmu.sh 124 HT20
+  543  sudo poweroff
+  544  sudo -S /home/up/setup_both_cmu.sh 124 HT20
+  545  date
+  546  watch -n1 chronyc tracking
+  547  sudo -S /home/up/setup_both_cmu.sh 104 HT20
+  548  sudo -S /home/up/setup_both_cmu.sh 108 HT20
+  549  sudo poweroff 
+  550  sudo -S /home/up/setup_both_cmu.sh 108 HT20
+  551  sudo poweroff 
+  552  ping 192.168.1.3
+  553  /home/up/mocap_data_cpp/NatnetCSI/build/raw_mocap_data 192.168.1.3 192.168.1.22
+  554  /home/up/mocap_data_cpp/NatnetCSI/build/raw_mocap_data
+  555  /home/up/mocap_data_cpp/NatnetCSI/build/raw_mocap_data 192.168.1.3 192.168.1.22
+  556  vim adaptivenw/startdata.sh 
+  557  /home/up/mocap_data_cpp/NatnetCSI/build/raw_mocap_data 192.168.1.3 192.168.1.22
+  558  clear
+  559  exit
+  560  sudo -S /home/up/setup_both_cmu.sh 108 HT20
+  561  sudo poweroff 
+  562  sudo -S /home/up/setup_both_cmu.sh 108 HT20
+  563  dmesg -wH
+  564  sudo poweroff 
+  565  watch -n1 chronyc tracking
+  566  sudo chronyc -a makestep
+  567  watch -n1 chronyc tracking
+  568  logout
+  569  sudo -S /home/up/setup_both_cmu.sh 108 HT20
+  570  watch -n1 chronyc tracking
+  571  ping 192.168.1.140
+  572  ping 192.168.1.40
+  573  watch -n1 chronyc tracking
+  574  sudo restart chronyc
+  575  sudo service chrony restart
+  576  watch -n1 chronyc tracking
+  577  date
+  578  watch -n1 chronyc tracking
+  579  ifconfig
+  580  :q
+  581  watch -n1 chronyc tracking
+  582  vi /etc/chrony/chrony.conf 
+  583  sudo chronyc -a makestep
+  584  watch -n1 chronyc tracking
+  585  ping 192.168.1.40
+  586  watch -n1 chronyc tracking
+  587  sudo service chrony restart
+  588  watch -n1 chronyc tracking
+  589  sudo service chrony restart
+  590  watch -n1 chronyc tracking
+  591  sudo chronyc -a makestep
+  592  watch -n1 chronyc tracking
+  593  sudo reboot now
+  594  cd ~/catkin_ws/
+  595  catkin build -j1
+  596  roslaunch orb_slam2_ros orb_slam2_d435_rgbd.launch
+  597  ls
+  598  cd src
+  599  ls
+  600  cd orb_slam_2_ros/
+  601  ls
+  602  cd ros
+  603  ls
+  604  cd launch/
+  605  ls
+  606  roslaunch orb_slam2_ros orb_slam2_d435_rgbd.launch
+  607  roslaunch orb_slam2_d435_rgbd.launch 
+  608  roslaunch orb_slam2_ros
+  609  source ~/catkin_ws/devel/setup.bash 
+  610  roslaunch orb_slam2_ros orb_slam2_d435_rgbd.launch 
+  611  cd ..
+  612  cd ~/catkin_ws/src/
+  613  git clone https://github.com/IntelRealSense/realsense-ros.git
+  614  cd realsense-ros/
+  615  git checkout `git tag | sort -V | grep -P "^\d+\.\d+\.\d+" | tail -1`
+  616  cd ..
+  617  git clone https://github.com/pal-robotics/ddynamic_reconfigure/tree/kinetic-devel
+  618  git clone https://github.com/pal-robotics/ddynamic_reconfigure.git
+  619  sudo apt-key adv --keyserver keys.gnupg.net --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
+  620  sudo add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo xenial main" -u
+  621  sudo apt-get install librealsense2-dkms
+  622  realsense-viewer 
+  623  cd ..
+  624  catkin build -j2
+  625  source ~/.bashrc
+  626  roslaunch realsense2_camera rs_camera.launch
+  627  source devel/setup.bash 
+  628  roslaunch realsense2_camera r
+  629  roslaunch realsense2_camera rs_camera.launch device_type:=d435 align_depth:=true
+  630  rostopic list
+  631  rostopic echo /orb_slam2_rgbd/pose
+  632  rviz
+  633  top
+  634  cd catkin_ws/
+  635  catkin build
+  636  roslaunch orb_slam2_ros orb_slam2_d435_rgbd.launch 
+  637  vi src/orb_slam_2_ros/ros/config/
+  638  cd src/orb_slam_2_ros/ros/config/
+  639  ls
+  640  vi dynamic_reconfigure.cfg 
+  641  cd ..
+  642  ks
+  643  ls
+  644  cd include/
+  645  ls
+  646  cd ..
+  647  cd launch/
+  648  ls
+  649  vi orb_slam2_d435_rgbd.launch 
+  650  roslaunch orb_slam2_ros orb_slam2_d435_rgbd.launch 
+  651  rviz &
+  652  rostopic hz /orb_slam2_rgbd/pose
+  653  rviz & 2&>1
+  654  rostopic echo /orb_slam2_rgbd/pose
+  655  rostopic echo --onc
+  656  rostopic echo --oncc
+  657  rostopic echo --once
+  658  rostopic echo /orb_slam2_rgbd/pose 
+  659  top
+  660  uname -a
+  661  roslaunch realsense2_camera rs_rgbd.launch 
+  662  source ~/catkin_ws/devel/setup.bash 
+  663  roslaunch realsense2_camera rs_rgbd.launch 
+  664  cd ~/catkin_ws/src/realsense-ros/realsense2_camera/launch/
+  665  ls
+  666  roslaunch realsense2_camera rs_camera.launch device_type:=d435 align_depth:=true
+  667  sudo -S /home/up/setup_both_cmu.sh 108 HT20
+  668  dmesg -wH
+  669  watch -n1 chronyc tracking
+  670  sudo poweroff 
+  671  sudo -S /home/up/setup_both_cmu.sh 108 HT20
+  672  watch -n1 chronyc tracking
+  673  dmesg -wH
+  674  sudo poweroff 
+  675  sudo -S /home/up/setup_both_cmu.sh 108 HT20
+  676  dmesg -wH
+  677  sudo poweroff 
+  678  sudo -S /home/up/setup_both_cmu.sh 108 HT20
+  679  dmesg -wH
+  680  sudo -S /home/up/setup_both_cmu.sh 108 HT20
+  681  dmesg -wH
+  682  sudo -S /home/up/setup_both_cmu.sh 108 HT20
+  683  dmesg -wH
+  684  iwconfig
+  685  dmesg -wH
+  686  sudo -S /home/up/setup_both_cmu.sh 104 HT20
+  687  sudo poweroff 
+  688  sudo -S /home/up/setup_both_cmu.sh 108 HT20
+  689  watch -n1 chronyc tracking
+  690  sudo chronyc -a makestep
+  691  watch -n1 chronyc tracking
+  692  sudo chronyc -a makestep
+  693  watch -n1 chronyc tracking
+  694  sudo chronyc -a makestep
+  695  watch -n1 chronyc tracking
+  696  sudo -S /home/up/setup_both_cmu.sh 161 HT20
+  697  iwconfig 
+  698  dmesg -wH
+  699  sudo -S /home/up/setup_both_cmu.sh 161 HT20
+  700  dmesg -wH
+  701  sudo -S /home/up/setup_both_cmu.sh 108 HT20
+  702  dmesg -wH
+  703  sudo -S /home/up/setup_both_cmu.sh 161 HT20
+  704  dmesg -wH
+  705  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  706  dmesg -wH
+  707  iwconfig 
+  708  watch -n1 chronyc tracking
+  709  sudo poweroff 
+  710  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  711  dmesg -wH
+  712  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  713  dmesg 
+  714  sudo chronyc -a makestep
+  715  watch -n1 chronyc tracking
+  716  dmesg -wH
+  717  sudo shutdown now
+  718  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  719  sudo poweroff
+  720  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  721  sudo chronyc -a makestep
+  722  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  723  dmesg -wH
+  724  iwconfig
+  725  sudo -S /home/up/setup_both_cmu.sh 132 HT20
+  726  iwconfig
+  727  dmesg -wH
+  728  sudo -S /home/up/setup_both_cmu.sh 104 HT20
+  729  dmesg -wH
+  730  sudo reboot
+  731  sudo -S /home/up/setup_both_cmu.sh 104 HT20
+  732  dmesg -wH
+  733  sudo ./random_packets 100 29 1 10000
+  734  sudo ./random_packets 10000 29 1 10000
+  735  iwconfig
+  736  sudo ./random_packets 10000 29 1 10000
+  737  dmesg -wH
+  738  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  739  sudo poweroff
+  740  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  741  sudo ./random_packets 10000 29 1 10000
+  742  dmesg -wH
+  743  exit
+  744  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  745  dmesg -wH
+  746  sudo poweroff 
+  747  ifconfig
+  748  cd catkin_ws/
+  749  ls
+  750  cd src
+  751  ls
+  752  git clone https://github.com/ROBOTIS-GIT/hls_lfcd_lds_driver.git
+  753  git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+  754  git clone https://github.com/ROBOTIS-GIT/turtlebot3.git
+  755  cd turtlebot3
+  756  sudo rm -r turtlebot3_description/ turtlebot3_teleop/ turtlebot3_navigation/ turtlebot3_slam/ turtlebot3_example/
+  757  sudo apt-get install ros-kinetic-rosserial-python ros-kinetic-tf
+  758  cd ~/catkin_ws/
+  759  catkin_make
+  760  catkin build
+  761  rosrun turtlebot3_bringup create_udev_rules
+  762  vi ~/.bashrc
+  763  rosrun turtlebot3_bringup create_udev_rules
+  764  source ~/.bashrc 
+  765  $ roslaunch turtlebot3_bringup turtlebot3_robot.launch
+  766  sudo poweroff
+  767  vi ~/.ssh/authorized_keys 
+  768  logout
+  769  exit
+  770  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  771  sudo chronyc -a makestep
+  772  watch -n1 chronyc tracking
+  773  sudo chronyc -a makestep
+  774  watch -n1 chronyc tracking
+  775  dmesg -wH
+  776  sudo chronyc -a makestep
+  777  watch -n1 chronyc tracking 
+  778  sudo poweroff 
+  779  rostopic info /waffle_102/cmd_vel
+  780  rostopic info /waffle_102/cmd_vel_rc100 
+  781  rostopic pub -r 100 /waffle_102/cmd_vel geometry_msgs/Twist "linear:
+  782    x: 0.05
+  783    y: 0.0
+  784    z: 0.0
+  785  angular:
+  786    x: 0.0
+  787    y: 0.0
+  788    z: 0.0" 
+  789  rostopic pub -r 100 /waffle_102/cmd_vel geometry_msgs/Twist "linear:
+  790    x: 0.0
+  791    y: 0.0
+  792    z: 0.0
+  793  angular:
+  794    x: 0.0
+  795    y: 0.0
+  796    z: 0.0" 
+  797  rostopic pub -r 100 /waffle_102/cmd_vel geometry_msgs/Twist "linear:
+  798    x: 0.05
+  799    y: 0.0
+  800    z: 0.0
+  801  angular:
+  802    x: 0.0
+  803    y: 0.0
+  804    z: 0.0" 
+  805  rostopic pub -r 100 /waffle_102/cmd_vel geometry_msgs/Twist "linear:
+  806    x: 0.05
+  807    y: 0.0
+  808    z: 0.0
+  809  angular:
+  810    x: 0.0
+  811    y: 0.0
+  812    z: 0.0" 
+  813  sudo systemctl status chrony.service 
+  814  watch -n1 chronyc tracking
+  815  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  816  dmesg -wH
+  817  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  818  dmesg -wH
+  819  sudo poweroff 
+  820  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  821  dmesg -wH
+  822  watch -n1 chronyc tracking
+  823  sudo poweroff 
+  824  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  825  dmesg -wH
+  826  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  827  dmesg -wH
+  828  clear
+  829  watch -n1 chronyc tracking
+  830  dmesg -wH
+  831  sudo chronyc -a makestep
+  832  watch -n1 chronyc tracking
+  833  sudo poweroff 
+  834  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  835  ls -l
+  836  ls -l Documents/linux-80211n-csitool-supplementary/injection/
+  837  dmesg -wH
+  838  sudo ./random_packets 10000 29 1 10000
+  839  dmesg -wH
+  840  vim ~/.bashrc 
+  841  dmesg -wH
+  842  ./adaptivenw/stopdata.sh 
+  843  sudo poweroff 
+  844  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  845  dmesg -wH
+  846  watch -n1 chronyc tracking
+  847  sudo chronyc -a makestep
+  848  sudo poweroff 
+  849  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  850  dmesg -wH
+  851  sudo chronyc -a makestep
+  852  watch -n1 chronyc tracking
+  853  sudo reboot now
+  854  sudo -S /home/up/setup_both_cmu.sh 128 HT20
+  855  watch -n1 chronyc tracking
+  856  sudo poweroff 
+  857  history > Documents/up2_command_history.txt

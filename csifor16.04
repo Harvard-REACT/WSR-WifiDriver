@@ -1,0 +1,10 @@
+make -C /lib/modules/4.15.0-45-generic/build M=~/Documents/iwlwifi modules
+
+cd /lib/modules/4.15.0-45-generic/kernel/drivers/net/wireless/intel/iwlwifi/
+
+sudo cp ~/Documents/iwlwifi/iwlwifi.ko ./
+sudo cp ~/Documents/iwlwifi/dvm/iwldvm.ko ./
+ sudo cp ~/Documents/iwlwifi/dvm/iwldvm.ko ./dvm/
+ sudo cp ~/Documents/iwlwifi/mvm/iwlmvm.ko ./mvm
+
+
