@@ -57,7 +57,7 @@ Note: Please make both the above changes in any robot on which the driver is ins
 5. Compile the drivers
 ```
 cd ~
-sudo make -j4 -C /lib/modules/$(uname -r)/build M=~/wifidrivercsi/iwlwifi/ modules
+sudo make -j4 -C /lib/modules/$(uname -r)/build M=~/WSR-WifiDriver/iwlwifi/ modules
 ```
 
 6. Copy the compiled drivers
