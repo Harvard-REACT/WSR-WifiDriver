@@ -77,9 +77,7 @@ sudo cp linux-80211n-csitool-supplementary/firmware/iwlwifi-5000-2.ucode.sigcomm
 sudo ln -s iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/iwlwifi-5000-2.ucode
 ```
 
-7. Change the source MAC address in random_packet (during packet injection) to the robot's MAC address. The MAC address is available on the Intel 5300 WiFi chip or can be obtained using the following command (This requires skipping step 4 to continue the driver installation as is):
-
-In file random_packet.c, modify the MAC addres on line 103 with corresponding address on your WiFi chip that you used in rx.c. Compile the code after modification
+7. Change the source MAC address in random_packet (during packet injection) to the robot's MAC address. In file random_packet.c, modify the MAC addres on line 103 with corresponding address on your WiFi chip that you used in rx.c (Step 4).
 
 ```
 cd linux-80211n-csitool-supplementary/injection
@@ -162,7 +160,7 @@ $ sudo ./linux-80211n-csitool-supplementary/injection/random_packets 10000 29 1 
 1. Load the network interface and set to monitor mode
 ```
 $ cd ~
-$ sudo ./wificsidriver/setup.sh
+$ sudo ./WSR-WifiDriver/setup.sh
 ```
 
 2. To log CSI data to a file
