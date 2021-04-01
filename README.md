@@ -60,15 +60,16 @@ cd ~
 sudo make -j4 -C /lib/modules/$(uname -r)/build M=~/WSR-WifiDriver/iwlwifi/ modules
 ```
 
-6. Copy the compiled drivers
+Copy the compiled drivers
 ```
-sudo cp ~/wifidrivercsi/iwlwifi/iwlwifi.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/
-sudo cp ~/wifidrivercsi/iwlwifi/dvm/iwldvm.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/dvm/
-sudo cp ~/wifidrivercsi/iwlwifi/mvm/iwlmvm.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/mvm/
+sudo cp ~/WSR-WifiDriver/iwlwifi/iwlwifi.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/
+sudo cp ~/WSR-WifiDriver/iwlwifi/dvm/iwldvm.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/dvm/
+sudo cp ~/WSR-WifiDriver/iwlwifi/mvm/iwlmvm.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/mvm/
 sudo depmod
 ```
 
 6. Follow step 3 given in given in [Linux 802.11n CSI Tool installation instructions](http://dhalperi.github.io/linux-80211n-csitool/installation.html) to install the modified firmware
+
 ```
 git clone https://github.com/dhalperi/linux-80211n-csitool-supplementary.git
 for file in /lib/firmware/iwlwifi-5000-*.ucode; do sudo mv $file $file.orig; done
@@ -76,8 +77,7 @@ sudo cp linux-80211n-csitool-supplementary/firmware/iwlwifi-5000-2.ucode.sigcomm
 sudo ln -s iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/iwlwifi-5000-2.ucode
 ```
 
-7.
-Change the source MAC address in random_packet (during packet injection) to the robot's MAC address. The MAC address is available on the Intel 5300 WiFi chip or can be obtained using the following command (This requires skipping step 4 to continue the driver installation as is):
+7. Change the source MAC address in random_packet (during packet injection) to the robot's MAC address. The MAC address is available on the Intel 5300 WiFi chip or can be obtained using the following command (This requires skipping step 4 to continue the driver installation as is):
 
 In file random_packet.c, modify the MAC addres on line 103 with corresponding address on your WiFi chip that you used in rx.c. Compile the code after modification
 
@@ -86,16 +86,16 @@ cd linux-80211n-csitool-supplementary/injection
 vi random_packets.c
 ```
 
-7. Build userspace csi data logging tool as per step 4 in [Linux 802.11n CSI Tool installation instructions](http://dhalperi.github.io/linux-80211n-csitool/installation.html) to install the modified firmware
+8. Build userspace csi data logging tool as per step 4 in [Linux 802.11n CSI Tool installation instructions](http://dhalperi.github.io/linux-80211n-csitool/installation.html) to install the modified firmware
 ```
 make -C linux-80211n-csitool-supplementary/netlink
 ```
 
-8. Load the dirvers and pass the required channel and bandwidth as parameters by running the setup script
+9. Load the dirvers and pass the required channel and bandwidth as parameters by running the setup script
 ```
 cd ~
-chmod +x ~/wifidrivercsi/setup.sh
-sudo ./wifidrivercsi/setup.sh <channel> <bandwidth>
+chmod +x ~/WSR-WifiDriver/setup.sh
+sudo ./WSR-WifiDriver/setup.sh <channel> <bandwidth>
 ```
 To verify that the network interface has been set to monitor mode, the following should be the output when running iwconfig
 
