@@ -86,6 +86,7 @@ vi random_packets.c
 
 8. Build userspace csi data logging tool as per step 4 in [Linux 802.11n CSI Tool installation instructions](http://dhalperi.github.io/linux-80211n-csitool/installation.html) to install the modified firmware
 ```
+cd ~
 make -C linux-80211n-csitool-supplementary/netlink
 ```
 
@@ -94,6 +95,10 @@ make -C linux-80211n-csitool-supplementary/netlink
 cd ~
 chmod +x ~/WSR-WifiDriver/setup.sh
 sudo ./WSR-WifiDriver/setup.sh <channel> <bandwidth>
+```
+e.g
+```
+sudo ./WSR-WifiDriver/setup.sh 108 HT20
 ```
 To verify that the network interface has been set to monitor mode, the following should be the output when running iwconfig
 
