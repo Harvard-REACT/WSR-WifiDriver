@@ -5,8 +5,8 @@ This is a modified verison and supplementary code released as part [Linux 802.11
 ## Hardware Requirements
 The driver requires Ubuntu 16.04 and SBC which has a mpcie slot to connect the Intel 5300 WiFi card. Currently tested on the following platforms -
 
-- [x] UP Squared Board (OS installation steps [here](https://github.com/up-board/up-community/wiki/Ubuntu_16.04))
-- [x] OnLogic Board (Same OS installation steps as above)
+- [x] UP Squared Board (OS installation steps [here](https://github.com/up-board/up-community/wiki/Ubuntu_16.04)). Check Specs [here](https://up-shop.org/up-squared-series.html)
+- [x] Intel Apollo Lake N4200 (Same OS installation steps as above). Check specs [here](https://www.onlogic.com/epm163/)
 
 ## Modified Driver and Firmware Setup Steps
 
