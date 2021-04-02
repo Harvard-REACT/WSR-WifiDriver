@@ -6,7 +6,7 @@ This is a modified verison and supplementary code released as part [Linux 802.11
 The driver requires Ubuntu 16.04 and SBC which has a mpcie slot to connect the Intel 5300 WiFi card. Currently tested on the following platforms -
 
 - [x] UP Squared Board (OS installation steps [here](https://github.com/up-board/up-community/wiki/Ubuntu_16.04))
-- [ ] OnLogic Board (Same OS installation steps as above)
+- [x] OnLogic Board (Same OS installation steps as above)
 
 ## Modified Driver and Firmware Setup Steps
 
@@ -77,20 +77,13 @@ sudo cp linux-80211n-csitool-supplementary/firmware/iwlwifi-5000-2.ucode.sigcomm
 sudo ln -s iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/iwlwifi-5000-2.ucode
 ```
 
-7. Change the source MAC address in random_packet (during packet injection) to the robot's MAC address. In file random_packet.c, modify the MAC addres on line 103 with corresponding address on your WiFi chip that you used in rx.c (Step 4).
-
-```
-cd linux-80211n-csitool-supplementary/injection
-vi random_packets.c
-```
-
-8. Build userspace csi data logging tool as per step 4 in [Linux 802.11n CSI Tool installation instructions](http://dhalperi.github.io/linux-80211n-csitool/installation.html) to install the modified firmware
+7. Build userspace csi data logging tool as per step 4 in [Linux 802.11n CSI Tool installation instructions](http://dhalperi.github.io/linux-80211n-csitool/installation.html) to install the modified firmware
 ```
 cd ~
 make -C linux-80211n-csitool-supplementary/netlink
 ```
 
-9. Load the dirvers and pass the required channel and bandwidth as parameters by running the setup script
+8. Load the dirvers and pass the required channel and bandwidth as parameters by running the setup script
 ```
 cd ~
 chmod +x ~/WSR-WifiDriver/setup.sh
@@ -135,7 +128,14 @@ make -j4
 sudo make install
 ```
 
-3. Compile the packets injection code (make sure that Step 6 of previous section is completed
+3. Change the source MAC address in random_packet (during packet injection) to the robot's MAC address. In file random_packet.c, modify the MAC addres on line 103 with corresponding address on your WiFi chip that you used in rx.c (Step 4).
+
+```
+cd linux-80211n-csitool-supplementary/injection
+vi random_packets.c
+```
+
+4. Compile the packets injection code (make sure that Step 6 of previous section is completed
 ```
 $ cd ~
 $ make -C linux-80211n-csitool-supplementary/injection
@@ -147,7 +147,7 @@ $ make -C linux-80211n-csitool-supplementary/injection
 1. Load the network interface and set to monitor mode (else the following [issue](https://github.com/dhalperi/linux-80211n-csitool-supplementary/issues/132) will be seen
 ```
 $ cd ~
-$ sudo ./wificsidriver/setup.sh
+$ sudo ./WSR-WifiDriver/setup.sh
 ```
 
 2. Start packet transmission
