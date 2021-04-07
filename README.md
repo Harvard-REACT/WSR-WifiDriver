@@ -118,6 +118,11 @@ wlp1s0    IEEE 802.11  Mode:Monitor  Frequency:5.52 GHz  Tx-Power=15 dBm
 
 ```
 
+9. Add a hold on the kernel (kernel upgrades have been known to cause error if the driver has been installed.).
+```
+sudo apt-mark hold $(uname -r)
+```
+
 ## Setup of packet injection (Reference [Packet Injection](https://github.com/dhalperi/linux-80211n-csitool-supplementary/tree/master/injection))
 1. Install libpcap-dev
 ```
