@@ -15,7 +15,7 @@ __attribute__((section(".gnu.linkonce.this_module"))) = {
 	.arch = MODULE_ARCH_INIT,
 };
 
-#ifdef RETPOLINE
+#ifdef CONFIG_RETPOLINE
 MODULE_INFO(retpoline, "Y");
 #endif
 
@@ -25,4 +25,4 @@ __attribute__((section(".modinfo"))) =
 "depends=mac80211,iwlwifi,cfg80211";
 
 
-MODULE_INFO(srcversion, "6491C7BB31C81C9E645EC9C");
+MODULE_INFO(srcversion, "EA1F526E0B02078C883407C");

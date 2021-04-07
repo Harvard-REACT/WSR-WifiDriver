@@ -1,5 +1,2 @@
 *.o
-*.order
-*.tmp
-*.mod.c
 
