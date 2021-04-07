@@ -6,11 +6,13 @@ This is a modified verison and supplementary code released as part [Linux 802.11
 The driver requires Ubuntu 16.04 and SBC which has a mpcie slot to connect the Intel 5300 WiFi card. Currently tested on the following platforms -
 
 - [x] UP Squared Board (OS installation steps [here](https://github.com/up-board/up-community/wiki/Ubuntu_16.04))
-- [ ] OnLogic Board (Same OS installation steps as above)
+- [x] OnLogic Board (Same OS installation steps as above)
 
 ## Modified Driver and Firmware Setup Steps
 
 1. Prerequisites
+Connect to the board directly (using keyboard/mouse) and make sure that it is plugged in to internet via an ethernet cable.
+
 ```
 sudo apt-get update 
 sudo apt-get install gcc make linux-headers-$(uname -r) git-core
@@ -36,12 +38,13 @@ sudo cp dvm/iwldvm.ko dvm/iwldvm.ko.bak
 ```
 
 4. MAC address setup to enable robot packet identification
-Change the MAC address in the iwlwifi/dvm/rx.c on line 44. Change the bytes 17-22 from 0xff to intended MAC address as source MAC address.
+Change the MAC address in the iwlwifi/dvm/rx.c on line 44 which is the special_packet variable. (use any text editor)
+Change the sub-string 17-22 from 0xff to intended MAC address as source MAC address.
 ```
 vim ~/WSR-WifiDriver/iwlwifi/dvm/rx.c
 ```
 
-e.g Changing    
+e.g Changing (this would be the default value)    
 ```
 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
 ``` 
@@ -72,7 +75,7 @@ sudo depmod
 
 ```
 git clone https://github.com/dhalperi/linux-80211n-csitool-supplementary.git
-for file in /lib/firmware/iwlwifi-5000-*.ucode; do sudo mv $file $file.orig; done
+for file in /lib/firmware/iwlwifi-5000-i\*.ucode; do sudo mv $file $file.orig; done
 sudo cp linux-80211n-csitool-supplementary/firmware/iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/
 sudo ln -s iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/iwlwifi-5000-2.ucode
 ```
@@ -174,6 +177,8 @@ $ sudo linux-80211n-csitool-supplementary/netlink/log_to_file csi.dat
 ```
 
 ## Updating MAC IDs in the WSR Toolbox config files
+For this step, the [WSR-Toolbox-cpp](https://github.com/Harvard-REACT/WSR-Toolbox-cpp) needs to be installed.
+
 1. Add the MAC_ID in the config file for the robot. If its a RX_SAR_robot then use the field MAC_ID :
 ```
     "MAC_ID":{
