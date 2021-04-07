@@ -1,2 +1,5 @@
 *.o
-iwlwifi/
+*.order
+*.tmp
+*.mod.c
+
