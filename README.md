@@ -11,6 +11,7 @@ The driver requires Ubuntu 16.04 and SBC which has a mpcie slot to connect the I
 ## Modified Driver and Firmware Setup Steps
 
 1. Prerequisites
+
 Connect to the board directly (using keyboard/mouse) and make sure that it is plugged in to internet via an ethernet cable.
 
 ```
@@ -75,7 +76,7 @@ sudo depmod
 
 ```
 git clone https://github.com/dhalperi/linux-80211n-csitool-supplementary.git
-for file in /lib/firmware/iwlwifi-5000-i\*.ucode; do sudo mv $file $file.orig; done
+for file in /lib/firmware/iwlwifi-5000-i*.ucode; do sudo mv $file $file.orig; done
 sudo cp linux-80211n-csitool-supplementary/firmware/iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/
 sudo ln -s iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/iwlwifi-5000-2.ucode
 ```
