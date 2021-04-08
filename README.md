@@ -40,23 +40,19 @@ sudo cp dvm/iwldvm.ko dvm/iwldvm.ko.bak
 
 4. MAC address setup to enable robot packet identification
 Change the MAC address in the iwlwifi/dvm/rx.c on line 44 which is the special_packet variable. (use any text editor)
+
 Change the sub-string 17-22 from 0xff to intended MAC address as source MAC address.
 ```
 vim ~/WSR-WifiDriver/iwlwifi/dvm/rx.c
 ```
 
-e.g Changing (this would be the default value)    
-```
-0xff, 0xff, 0xff, 0xff, 0xff, 0xff
-``` 
-to 
-
+e.g Setting the value to
 ```
 0x00, 0x21, 0x6a, 0x39, 0x83, 0xa0
 ``` 
 enables the TX_Neighbor robot to embed a MAC ID 00:21:6A:39:83:A0 in the packets automatically transmitted. 
 
-Note: Please make both the above changes in any robot on which the driver is installed. 
+Note: Please make the above changes in all robots on which the driver is installed. 
 
 5. Compile the drivers
 ```
@@ -76,7 +72,7 @@ sudo depmod
 
 ```
 git clone https://github.com/dhalperi/linux-80211n-csitool-supplementary.git
-for file in /lib/firmware/iwlwifi-5000-i*.ucode; do sudo mv $file $file.orig; done
+for file in /lib/firmware/iwlwifi-5000-*.ucode; do sudo mv $file $file.orig; done
 sudo cp linux-80211n-csitool-supplementary/firmware/iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/
 sudo ln -s iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/iwlwifi-5000-2.ucode
 ```
@@ -133,53 +129,54 @@ sudo apt-get install libpcap-dev
 ```
 git clone https://github.com/dhalperi/lorcon-old.git
 cd lorcon-old
-make -j4
+cpuCores=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'` 
+make -j $cpuCores
 sudo make install
 ```
 
-3. Change the source MAC address in random_packet (during packet injection) to the robot's MAC address. In file random_packet.c, modify the MAC addres on line 103 with corresponding address on your WiFi chip that you used in rx.c (Step 4).
+3. Change the source MAC address in random_packet (during packet injection) to the robot's MAC address. In file random_packet.c, modify the MAC addres on line 103 with corresponding address that was used in rx.c (Step 4).
 
 ```
-cd linux-80211n-csitool-supplementary/injection
-vi random_packets.c
+cd ~/linux-80211n-csitool-supplementary/injection
+vim random_packets.c
 ```
 
 4. Compile the packets injection code (make sure that Step 6 of previous section is completed
 ```
-$ cd ~
-$ make -C linux-80211n-csitool-supplementary/injection
+cd ~
+make -C linux-80211n-csitool-supplementary/injection
 ```
 
 ## Collecting CSI data packets
 ### On the Transmitting robot start packet transmission
 
-1. Load the network interface and set to monitor mode (else the following [issue](https://github.com/dhalperi/linux-80211n-csitool-supplementary/issues/132) will be seen
+1. Load the network interface and set to monitor mode, using a channel (else the following [issue](https://github.com/dhalperi/linux-80211n-csitool-supplementary/issues/132) will be seen
 ```
-$ cd ~
-$ sudo ./WSR-WifiDriver/setup.sh
+cd ~
+sudo ./WSR-WifiDriver/setup.sh 108 HT20
 ```
 
 2. Start packet transmission
 ```
-$ sudo ./linux-80211n-csitool-supplementary/injection/random_packets <total_packets to send> <packet_size> 1 <frequency>
+sudo ./linux-80211n-csitool-supplementary/injection/random_packets <total_packets to send> <packet_size> 1 <frequency>
 ```
 
 e.g. To send 10000 packets, each of size 29 with 1000 packets sent every 100 ms
 
 ```
-$ sudo ./linux-80211n-csitool-supplementary/injection/random_packets 10000 29 1 100
+sudo ./linux-80211n-csitool-supplementary/injection/random_packets 10000 29 1 100
 ```
 
 ### On receiving robot
-1. Load the network interface and set to monitor mode
+1. Load the network interface (using the same channel) and set to monitor mode
 ```
-$ cd ~
-$ sudo ./WSR-WifiDriver/setup.sh
+cd ~
+sudo ./WSR-WifiDriver/setup.sh 108 HT20
 ```
 
 2. To log CSI data to a file
 ```
-$ sudo linux-80211n-csitool-supplementary/netlink/log_to_file csi.dat
+sudo linux-80211n-csitool-supplementary/netlink/log_to_file csi.dat
 ```
 
 ## Updating MAC IDs in the WSR Toolbox config files
