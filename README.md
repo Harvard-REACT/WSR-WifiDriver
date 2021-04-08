@@ -14,31 +14,20 @@ The driver requires Ubuntu 16.04 and SBC which has a mpcie slot to connect the I
 
 Connect to the board directly (using keyboard/mouse) and make sure that it is plugged in to internet via an ethernet cable.
 
-```
-sudo apt-get update 
-sudo apt-get install gcc make linux-headers-$(uname -r) git-core
-sudo apt-get install iw vim
-echo iface wlp1s0 inet manual | sudo tee -a /etc/network/interfaces
-sudo service network-manager restart
-```
-
 Reference : [Linux 802.11n CSI Tool installation instructions](http://dhalperi.github.io/linux-80211n-csitool/installation.html)
 
-
-2. Clone this repository in home directory 
+Clone this repository in home directory and update script permissions
 ```
-git clone https://github.com/Harvard-REACT/WSR-WifiDriver
-```
-
-3. Backup the default iwlwifi drivers
-```
-cd /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/
-sudo cp iwlwifi.ko iwlwifi.ko.bak
-sudo cp mvm/iwlmvm.ko mvm/iwlmvm.ko.bak
-sudo cp dvm/iwldvm.ko dvm/iwldvm.ko.bak
+git clone https://github.com/Harvard-REACT/WSR-WifiDriveri
+chmod +x WSR-WifiDriver/env_setup_1.sh WSR-WifiDriver/env_setup_2.sh
 ```
 
-4. MAC address setup to enable robot packet identification
+2. Run the first environement setup script
+```
+./WSR-WifiDriver/env_setup_1.sh 
+```
+
+3. MAC address setup to enable robot packet identification
 Change the MAC address in the iwlwifi/dvm/rx.c on line 44 which is the special_packet variable. (use any text editor)
 
 Change the sub-string 17-22 from 0xff to intended MAC address as source MAC address.
@@ -57,24 +46,13 @@ Note: Please make the above changes in all robots on which the driver is install
 5. Compile the drivers
 ```
 cd ~
-sudo make -j4 -C /lib/modules/$(uname -r)/build M=~/WSR-WifiDriver/iwlwifi/ modules
+cpuCores=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'`
+sudo make -j $cpuCores -C /lib/modules/$(uname -r)/build M=~/WSR-WifiDriver/iwlwifi/ modules
 ```
 
-Copy the compiled drivers
+6. Run the second environement setup script
 ```
-sudo cp ~/WSR-WifiDriver/iwlwifi/iwlwifi.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/
-sudo cp ~/WSR-WifiDriver/iwlwifi/dvm/iwldvm.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/dvm/
-sudo cp ~/WSR-WifiDriver/iwlwifi/mvm/iwlmvm.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/mvm/
-sudo depmod
-```
-
-6. Follow step 3 given in given in [Linux 802.11n CSI Tool installation instructions](http://dhalperi.github.io/linux-80211n-csitool/installation.html) to install the modified firmware
-
-```
-git clone https://github.com/dhalperi/linux-80211n-csitool-supplementary.git
-for file in /lib/firmware/iwlwifi-5000-*.ucode; do sudo mv $file $file.orig; done
-sudo cp linux-80211n-csitool-supplementary/firmware/iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/
-sudo ln -s iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/iwlwifi-5000-2.ucode
+./WSR-WifiDriver/env_setup_2.sh
 ```
 
 7. Build userspace csi data logging tool as per step 4 in [Linux 802.11n CSI Tool installation instructions](http://dhalperi.github.io/linux-80211n-csitool/installation.html) to install the modified firmware
@@ -83,7 +61,9 @@ cd ~
 make -C linux-80211n-csitool-supplementary/netlink
 ```
 
-8. Load the dirvers and pass the required channel and bandwidth as parameters by running the setup script
+## Verify drivers are working
+
+Load the dirvers and pass the required channel and bandwidth as parameters by running the setup script
 ```
 cd ~
 chmod +x ~/WSR-WifiDriver/setup.sh
@@ -103,33 +83,22 @@ iwconfig
 Expected output
 
 ```
-mon0      IEEE 802.11  Mode:Monitor  Frequency:5.52 GHz  Tx-Power=15 dBm   
+mon0      IEEE 802.11  Mode:Monitor  Frequency:5.54 GHz  Tx-Power=15 dBm   
           Retry short limit:7   RTS thr:off   Fragment thr:off
           Power Management:off
           
 
-wlp1s0    IEEE 802.11  Mode:Monitor  Frequency:5.52 GHz  Tx-Power=15 dBm   
+wlp1s0    IEEE 802.11  Mode:Monitor  Frequency:5.54 GHz  Tx-Power=15 dBm   
           Retry short limit:7   RTS thr:off   Fragment thr:off
           Power Management:off
 
 ```
 
-9. Add a hold on the kernel (kernel upgrades have been known to cause error if the driver has been installed.).
-```
-sudo apt-mark hold $(uname -r)
-```
-
 ## Setup of packet injection (Reference [Packet Injection](https://github.com/dhalperi/linux-80211n-csitool-supplementary/tree/master/injection))
-1. Install libpcap-dev
-```
-sudo apt-get install libpcap-dev
-```
 
-2. Download and compile LORCONv1
+1. compile LORCONv1
 ```
-git clone https://github.com/dhalperi/lorcon-old.git
 cd lorcon-old
-cpuCores=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'` 
 make -j $cpuCores
 sudo make install
 ```
