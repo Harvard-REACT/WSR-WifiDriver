@@ -55,6 +55,11 @@ sudo make -j $cpuCores -C /lib/modules/$(uname -r)/build M=~/WSR-WifiDriver/iwlw
 ./WSR-WifiDriver/env_setup_2.sh
 ```
 
+6.a Clone the modified linux-80211n-csitool-supplementary
+```
+git clone https://github.com/Harvard-REACT/WSR-Toolbox-linux-80211n-csitool-supplementary.git
+```
+
 7. Build userspace csi data logging tool as per step 4 in [Linux 802.11n CSI Tool installation instructions](http://dhalperi.github.io/linux-80211n-csitool/installation.html) to install the modified firmware
 ```
 cd ~

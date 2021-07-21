@@ -11,7 +11,7 @@ sudo cp ~/WSR-WifiDriver/iwlwifi/dvm/iwldvm.ko /lib/modules/$(uname -r)/kernel/d
 sudo cp ~/WSR-WifiDriver/iwlwifi/mvm/iwlmvm.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/mvm/
 sudo depmod
 
-git clone https://github.com/dhalperi/linux-80211n-csitool-supplementary.git
+#git clone https://github.com/dhalperi/linux-80211n-csitool-supplementary.git
 
 for file in /lib/firmware/iwlwifi-5000-*.ucode; do sudo mv $file $file.orig; done
 
