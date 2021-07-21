@@ -1142,6 +1142,9 @@ static void iwlagn_mac_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 			IWL_ERR(priv, "flush request fail\n");
 			goto done;
 		}
+		else {
+			IWL_ERR(priv, "weiying: packet droped\n");
+		}
 	}
 
 	IWL_DEBUG_TX_QUEUES(priv, "wait transmit/flush all frames\n");

@@ -1,3 +1,3 @@
-kernel//home/logic1/WSR-WifiDriver/iwlwifi//iwlwifi.ko
-kernel//home/logic1/WSR-WifiDriver/iwlwifi//dvm/iwldvm.ko
-kernel//home/logic1/WSR-WifiDriver/iwlwifi//mvm/iwlmvm.ko
+kernel//home/up5/wifidrivercsi/iwlwifi//iwlwifi.ko
+kernel//home/up5/wifidrivercsi/iwlwifi//dvm/iwldvm.ko
+kernel//home/up5/wifidrivercsi/iwlwifi//mvm/iwlmvm.ko

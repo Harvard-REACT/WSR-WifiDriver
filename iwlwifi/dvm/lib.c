@@ -78,6 +78,7 @@ void iwlagn_bfee_notif(struct iwl_priv *priv, struct iwl_rx_cmd_buffer *rxb)
 		//Weiying Start add time
 		bfee_notif->tv_sec = cur_tval.tv_sec;
 		bfee_notif->tv_usec = cur_tval.tv_usec;
+		bfee_notif->frame_count = cpu_to_le32(priv->csi_valid_mac);
 		//Weiying end
 		bfee_notif->timestamp_low =
 			cpu_to_le32(__le64_to_cpu(phy->timestamp));
@@ -104,7 +105,7 @@ void iwlagn_bfee_notif(struct iwl_priv *priv, struct iwl_rx_cmd_buffer *rxb)
 		/* Everything but antennas is in bottom 14 bits */
 		bfee_notif->fake_rate_n_flags =
 			cpu_to_le16(__le32_to_cpu(phy->rate_n_flags) & 0x3fff);
-/*		IWL_INFO(priv, "rssis: %u %u %u noise: %d agc: %u "
+		/*IWL_INFO(priv, "rssis: %u %u %u noise: %d agc: %u "
 				"antenna_sel: %02x fake_rate_n_flags=0x%x\n",
 				bfee_notif->rssiA, bfee_notif->rssiB,
 				bfee_notif->rssiC, bfee_notif->noise,
@@ -117,7 +118,7 @@ void iwlagn_bfee_notif(struct iwl_priv *priv, struct iwl_rx_cmd_buffer *rxb)
 	}
 
 	/* Log the bytes to a file */
-	if (priv->connector_log & IWL_CONN_BFEE_NOTIF_MSK)
+	if (priv->connector_log & IWL_CONN_BFEE_NOTIF_MSK&priv->csi_valid_mac!=1)
 		connector_send_msg((void *)bfee_notif,
 			len + sizeof(struct iwl_bfee_notif),
 			IWL_CONN_BFEE_NOTIF);

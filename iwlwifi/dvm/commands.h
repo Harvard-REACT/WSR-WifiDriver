@@ -3948,7 +3948,7 @@ struct iwl_bfee_notif_legacy {
 } __attribute__ ((packed));
 
 
-
+//Weiying Start
 struct iwl_bfee_notif {
 	__le32 timestamp_low;
 	__le16 bfee_count;
@@ -3962,8 +3962,10 @@ struct iwl_bfee_notif {
 	__le32 tv_sec;
 	__le32 tv_usec;
 	u8 macaddr[ETH_ALEN];
+	__le32 frame_count;
 	u8 payload[0];
 } __attribute__ ((packed));
+//Weiying ends
 
 
 /******************************************************************************

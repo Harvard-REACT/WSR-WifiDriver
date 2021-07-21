@@ -33,7 +33,7 @@
 #include <linux/sched.h>
 #include <net/mac80211.h>
 #include <asm/unaligned.h>
-
+#include <linux/delay.h>
 #include "iwl-trans.h"
 #include "iwl-io.h"
 #include "dev.h"
@@ -41,7 +41,7 @@
 #include "agn.h"
 #include "connector.h"//Weiying
 #define IWL_CMD_ENTRY(x) [x] = #x
-const char special_packet [] = {0x8, 0x0, 0x3c, 0x0, 0x0, 0x16, 0xea, 0x12, 0x34, 0x56, 0x0, 0x16, 0xea, 0x12, 0x34, 0x56, 0x00, 0x21, 0x6a, 0x39, 0x83, 0xa0, 0x0, 0x0, 0x32, 0x33, 0x54, 0x48, 0x6f, 0x81, 0x33, 0x45, 0xf1, 0x50, 0x8d, 0xd6, 0xc8, 0x77, 0x24, 0x5b, 0xcf, 0xf0, 0x8e, 0x20, 0xf4, 0x56, 0x2e, 0xe4, 0x1b, 0x92, 0x5e, 0x7f, 0x58, 0x19, 0x54, 0x41, 0xcd};
+const char special_packet [] = {0x8, 0x0, 0x3c, 0x0, 0x0, 0x16, 0xea, 0x12, 0x34, 0x56, 0x0, 0x16, 0xea, 0x12, 0x34, 0x56, 0x0, 0x21, 0x6a, 0x3f, 0x17, 0x5a, 0x0, 0x0,0x0, 0x32, 0x33, 0x54, 0x48, 0x6f, 0x81, 0x33, 0x45, 0xf1, 0x50, 0x8d, 0xd6, 0xc8, 0x77, 0x24, 0x5b, 0xcf, 0xf0, 0x8e, 0x20, 0xf4, 0x56, 0x2e, 0xe4, 0x1b, 0x92, 0x5e, 0x7f, 0x58, 0x19, 0x54, 0x41, 0xcd};
 
 //Weiying starts
 const char *const iwl_dvm_cmd_strings[REPLY_MAX] = {
@@ -890,26 +890,53 @@ void check_and_send_ack(struct iwl_priv *priv, unsigned char* datain, int lenin)
   unsigned char c;
   unsigned int d;
 
-  const int special_packet_length = 57;
-  const int inp_length = 57;
+  const int special_packet_length = 61;
+  const int inp_length = 61;
 
   struct sk_buff *skb = NULL;
-  const u8 iwl_bcast_addr[ETH_ALEN] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
-
+  //const u8 iwl_bcast_addr[ETH_ALEN] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
+  //int dif_ack = 0;
   if(lenin == inp_length) {
-   // IWL_ERR(priv, "Diana: Got a packet of length 57!\n");
-    /*
+    //IWL_ERR(priv, "Diana: Got a packet of length 57!\n");
+    
       // Print contents of received packet
-    for(j=0; j<lenin; ++j) {
+    /*for(j=0; j<lenin; ++j) {
       c = datain[j];
       d = (unsigned int)c;
       IWL_INFO(priv, "Rx-pkt[%d] = 0x%x\n", j, d);
-    }
-    */
+    }*/
+	//Convert 24-27 bytes to frame count
+	
+	priv->csi_valid_mac = (datain[24] << 24)+(datain[25] << 16)+(datain[26] << 8)+(datain[27]);
+//	IWL_INFO(priv, "Rx-pkt[%d] = 0x%x\n", j, datain[j]);
+
+//	IWL_ERR(priv,"%d \n",priv->csi_valid_mac);
+
+
+
     
-    skb = alloc_skb(special_packet_length, GFP_ATOMIC);
-    skb->len = special_packet_length;
-    memcpy((char*)skb->data, (char*)special_packet, special_packet_length);    
+    //udelay(1);
+//    char *copy_packet = 
+    //skb = alloc_skb(special_packet_length, GFP_ATOMIC);
+    skb = alloc_skb(lenin+1, GFP_ATOMIC);
+    skb->len = lenin+1;
+ //   datain[19] = special_packet[19];
+  //   datain[19] = special_packet[19];
+    //memcpy((char*)skb->data, (char*)special_packet, special_packet_length);    
+    memcpy((char*)skb->data, (char*)datain, lenin);    
+//     0x0, 0x21, 0x6a, 0x3f, 0x17, 0x5a, 16 - 21
+    skb->data[16] = 0x0;
+    skb->data[17] = 0x21;
+    skb->data[18] = 0x6a;
+    skb->data[19] = 0xb2;
+    skb->data[20] = 0x6e;
+    skb->data[21] = 0xfa;
+
+/*for(j=0; j<lenin+1; ++j) {
+      c = ((char*)skb->data)[j];
+      d = (unsigned int)c;
+      IWL_INFO(priv, "Rx-pkt[%d] = 0x%x\n", j, d);
+    }*/
     // Transmit!
     if (iwlagn_tx_skb(priv, NULL, skb)) {
       dev_kfree_skb_any(skb);
@@ -918,6 +945,7 @@ void check_and_send_ack(struct iwl_priv *priv, unsigned char* datain, int lenin)
   //else{
   	//IWL_ERR(priv,"Weiying: receive packet with length %d\n",lenin);
   //}
+ // return if_ack;
 }
 //Weiying end
 
@@ -1037,6 +1065,7 @@ static void iwlagn_rx_reply_rx(struct iwl_priv *priv,
 	memcpy(priv->csi_last_mac, header->addr3, ETH_ALEN*sizeof(u8));
 	//IWL_ERR(priv, "Assigned csi_last_mac\n");
 	/* Checks if the received packet is sent by random_packets and responds with a small ACK */
+
 	check_and_send_ack(priv, (unsigned char*)header, len);
 	//Weiying end
 	iwlagn_pass_packet_to_mac80211(priv, header, len, ampdu_status,
