@@ -50,12 +50,12 @@ cpuCores=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'`
 sudo make -j $cpuCores -C /lib/modules/$(uname -r)/build M=~/WSR-WifiDriver/iwlwifi/ modules
 ```
 
-6. Clone the modified linux-80211n-csitool-supplementary
+5. Clone the modified linux-80211n-csitool-supplementary
 ```
 git clone https://github.com/Harvard-REACT/WSR-Toolbox-linux-80211n-csitool-supplementary.git
 ```
 
-5. Run the second environement setup script
+6. Run the second environement setup script
 ```
 ./WSR-WifiDriver/env_setup_2.sh
 ```
@@ -139,7 +139,7 @@ sudo ./WSR-Toolbox-linux-80211n-csitool-supplementary/injection/random_packets <
 e.g. To send 10000 packets, each of size 29 with 1000 packets sent every 100 ms
 
 ```
-sudo ./linux-80211n-csitool-supplementary/injection/random_packets 10000 29 1 100
+sudo ./linux-80211n-csitool-supplementary/injection/random_packets 100000 29 1 1000
 ```
 
 ### On receiving robot
