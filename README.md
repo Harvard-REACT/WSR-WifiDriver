@@ -18,7 +18,7 @@ Reference : [Linux 802.11n CSI Tool installation instructions](http://dhalperi.g
 
 Clone this repository in home directory and update script permissions
 ```
-git clone https://github.com/Harvard-REACT/WSR-WifiDriveri
+git clone https://github.com/Harvard-REACT/WSR-WifiDriver
 chmod +x WSR-WifiDriver/env_setup_1.sh WSR-WifiDriver/env_setup_2.sh
 ```
 
@@ -43,21 +43,21 @@ enables the TX_Neighbor robot to embed a MAC ID 00:21:6A:39:83:A0 in the packets
 
 Note: Please make the above changes in all robots on which the driver is installed. 
 
-5. Compile the drivers
+4. Compile the drivers
 ```
 cd ~
 cpuCores=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'`
 sudo make -j $cpuCores -C /lib/modules/$(uname -r)/build M=~/WSR-WifiDriver/iwlwifi/ modules
 ```
 
-6. Run the second environement setup script
-```
-./WSR-WifiDriver/env_setup_2.sh
-```
-
-6.a Clone the modified linux-80211n-csitool-supplementary
+6. Clone the modified linux-80211n-csitool-supplementary
 ```
 git clone https://github.com/Harvard-REACT/WSR-Toolbox-linux-80211n-csitool-supplementary.git
+```
+
+5. Run the second environement setup script
+```
+./WSR-WifiDriver/env_setup_2.sh
 ```
 
 7. Build userspace csi data logging tool as per step 4 in [Linux 802.11n CSI Tool installation instructions](http://dhalperi.github.io/linux-80211n-csitool/installation.html) to install the modified firmware

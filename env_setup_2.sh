@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -13,13 +13,19 @@ sudo depmod
 
 #git clone https://github.com/dhalperi/linux-80211n-csitool-supplementary.git
 
-for file in /lib/firmware/iwlwifi-5000-*.ucode; do sudo mv $file $file.orig; done
+STR=$((ls -t1 /lib/firmware/*.orig |  head -n 1) 2>&1)
+SUB='cannot'
 
-sudo cp linux-80211n-csitool-supplementary/firmware/iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/
+if [[ "$STR" == *"$SUB"* ]]
+then
+    for file in /lib/firmware/iwlwifi-5000-*.ucode; do sudo mv $file $file.orig; done
+    sudo cp  WSR-Toolbox-linux-80211n-csitool-supplementary/firmware/iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/
 
-sudo ln -s iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/iwlwifi-5000-2.ucode
+    sudo ln -s iwlwifi-5000-2.ucode.sigcomm2010 /lib/firmware/iwlwifi-5000-2.ucode
 
-git clone https://github.com/dhalperi/lorcon-old.git
+    git clone https://github.com/dhalperi/lorcon-old.git
 
-sudo apt-mark hold $(uname -r)
-echo "Completed."
+    sudo apt-mark hold $(uname -r)
+fi
+
+echo "Setup completed."
