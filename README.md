@@ -63,7 +63,7 @@ git clone https://github.com/Harvard-REACT/WSR-Toolbox-linux-80211n-csitool-supp
 7. Build userspace csi data logging tool as per step 4 in [Linux 802.11n CSI Tool installation instructions](http://dhalperi.github.io/linux-80211n-csitool/installation.html) to install the modified firmware
 ```
 cd ~
-make -C linux-80211n-csitool-supplementary/netlink
+make -C WSR-Toolbox-linux-80211n-csitool-supplementary/netlink
 ```
 
 ## Verify drivers are working
@@ -108,17 +108,18 @@ make -j $cpuCores
 sudo make install
 ```
 
-3. Change the source MAC address in random_packet (during packet injection) to the robot's MAC address. In file random_packet.c, modify the MAC addres on line 103 with corresponding address that was used in rx.c (Step 4).
+3. Change the source MAC address in random_packet (during packet injection) to the robot's MAC address.
 
 ```
-cd ~/linux-80211n-csitool-supplementary/injection
-vim random_packets.c
+vim ~/WSR-Toolbox-linux-80211n-csitool-supplementary/linux-80211n-csitool-supplementary/injection/random_packets.c
 ```
+
+In file random_packet.c, modify the MAC addres on line 103 with corresponding address that was used in rx.c (Step 3 in 'Modified Driver and Firmware Setup').
 
 4. Compile the packets injection code (make sure that Step 6 of previous section is completed
 ```
 cd ~
-make -C linux-80211n-csitool-supplementary/injection
+make -C WSR-Toolbox-linux-80211n-csitool-supplementary/injection
 ```
 
 ## Collecting CSI data packets
@@ -132,7 +133,7 @@ sudo ./WSR-WifiDriver/setup.sh 108 HT20
 
 2. Start packet transmission
 ```
-sudo ./linux-80211n-csitool-supplementary/injection/random_packets <total_packets to send> <packet_size> 1 <frequency>
+sudo ./WSR-Toolbox-linux-80211n-csitool-supplementary/injection/random_packets <total_packets to send> <packet_size> 1 <frequency>
 ```
 
 e.g. To send 10000 packets, each of size 29 with 1000 packets sent every 100 ms
@@ -150,7 +151,7 @@ sudo ./WSR-WifiDriver/setup.sh 108 HT20
 
 2. To log CSI data to a file
 ```
-sudo linux-80211n-csitool-supplementary/netlink/log_to_file csi.dat
+sudo ~/WSR-Toolbox-linux-80211n-csitool-supplementary/netlink/log_to_file csi.dat
 ```
 
 ## Updating MAC IDs in the WSR Toolbox config files
