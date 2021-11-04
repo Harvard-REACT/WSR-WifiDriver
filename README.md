@@ -30,16 +30,21 @@ chmod +x WSR-WifiDriver/env_setup_1.sh WSR-WifiDriver/env_setup_2.sh
 3. MAC address setup to enable robot packet identification
 Change the MAC address in the iwlwifi/dvm/rx.c on line 44 which is the special_packet variable. (use any text editor)
 
-Change the sub-string 17-22 from 0xff to intended MAC address as source MAC address.
+Change the sub-string 930-935 from 0xff to intended MAC address as source MAC address.
 ```
 vim ~/WSR-WifiDriver/iwlwifi/dvm/rx.c
 ```
 
 e.g Setting the value to
 ```
-0x00, 0x21, 0x6a, 0x39, 0x83, 0xa0
+ 930     skb->data[16] = 0x0;
+ 931     skb->data[17] = 0x21;
+ 932     skb->data[18] = 0x6a;
+ 933     skb->data[19] = 0x3f;
+ 934     skb->data[20] = 0x17;
+ 935     skb->data[21] = 0x5a; 
 ``` 
-enables the TX_Neighbor robot to embed a MAC ID 00:21:6A:39:83:A0 in the packets automatically transmitted. 
+enables the TX_Neighbor robot to embed a MAC ID 00:21:6A:3F:17:5A (or essentially random numbers in the mac-d format) in the packets automatically transmitted. 
 
 Note: Please make the above changes in all robots on which the driver is installed. 
 
