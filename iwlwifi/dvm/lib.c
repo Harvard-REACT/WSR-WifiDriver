@@ -110,15 +110,15 @@ void iwlagn_bfee_notif(struct iwl_priv *priv, struct iwl_rx_cmd_buffer *rxb)
 				bfee_notif->rssiA, bfee_notif->rssiB,
 				bfee_notif->rssiC, bfee_notif->noise,
 				bfee_notif->agc, bfee_notif->antenna_sel,
-				bfee_notif->fake_rate_n_flags); */
-
+				bfee_notif->fake_rate_n_flags); 
+		*/
 		/* Increment counter */
 		bfee_count++;
 		bfee_notif->bfee_count = cpu_to_le16(bfee_count);
 	}
 
 	/* Log the bytes to a file */
-	if (priv->connector_log & IWL_CONN_BFEE_NOTIF_MSK&priv->csi_valid_mac!=1)
+	if (priv->connector_log & IWL_CONN_BFEE_NOTIF_MSK)
 		connector_send_msg((void *)bfee_notif,
 			len + sizeof(struct iwl_bfee_notif),
 			IWL_CONN_BFEE_NOTIF);

@@ -25,4 +25,4 @@ __attribute__((section(".modinfo"))) =
 "depends=mac80211,iwlwifi,cfg80211";
 
 
-MODULE_INFO(srcversion, "7BCD85C4B8B66A98D90DE0E");
+MODULE_INFO(srcversion, "7AA1A4D51CB06EED6002659");
