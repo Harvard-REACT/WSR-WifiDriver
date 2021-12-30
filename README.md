@@ -7,30 +7,40 @@ The driver requires Ubuntu 16.04 and SBC which has a mpcie slot to connect the I
 
 - [x] UP Squared Board (OS installation steps [here](https://github.com/up-board/up-community/wiki/Ubuntu_16.04)). Check Specs [here](https://up-shop.org/up-squared-series.html)
 - [x] Intel Apollo Lake N4200 (Same OS installation steps as above). Check specs [here](https://www.onlogic.com/epm163/)
+- [ ] Intel NUC8i3BEH (Generic Ubuntu 16.04 installation). Check base specs [here](https://www.intel.com/content/www/us/en/products/sku/126150/intel-nuc-kit-nuc8i3beh/specifications.html)
 
 ## Modified Driver and Firmware Setup Steps
 
 1. Prerequisites
 
-Connect to the board directly (using keyboard/mouse) and make sure that it is plugged in to internet via an ethernet cable.
+Connect to the board directly (using keyboard/mouse) and make sure that it is plugged in to internet via an ethernet cable. 
+
+Before boot up, disable SecureBoot in BIOS (applicable to Intel NUC).
 
 Reference : [Linux 802.11n CSI Tool installation instructions](http://dhalperi.github.io/linux-80211n-csitool/installation.html)
+
+Make sure that the Intel 5300 WiFi card's wifi interface is visible after clicking the WiFi icon (top right corner) and also using ifconfig in the terminal.
+
 
 Clone this repository in home directory and update script permissions
 ```
 git clone https://github.com/Harvard-REACT/WSR-WifiDriver
-chmod +x WSR-WifiDriver/env_setup_1.sh WSR-WifiDriver/env_setup_2.sh
+chmod +x WSR-WifiDriver/env_setup_1.sh WSR-WifiDriver/env_setup_2.sh WSR-WifiDriver/setup.sh
 ```
 
 2. Run the first environement setup script
 ```
-./WSR-WifiDriver/env_setup_1.sh 
+./WSR-WifiDriver/env_setup_1.sh <name of intel 5300 network interface> 
+
+e.g. 
+./WSR-WifiDriver/env_setup_1.sh wlp59s0
 ```
+This should show the Intel 5300 wifi card as 'device not managed' after clicking the Wifi icon.
 
 3. MAC address setup to enable robot packet identification
 Change the MAC address in the iwlwifi/dvm/rx.c on line 44 which is the special_packet variable. (use any text editor)
 
-Change the sub-string 930-935 from 0xff to intended MAC address as source MAC address.
+Change the sub-string 930-935 from 0xff to intended MAC address as source MAC address (obtained for the network interface using ifconfig).
 ```
 vim ~/WSR-WifiDriver/iwlwifi/dvm/rx.c
 ```
@@ -44,7 +54,7 @@ e.g Setting the value to
  934     skb->data[20] = 0x17;
  935     skb->data[21] = 0x5a; 
 ``` 
-enables the TX_Neighbor robot to embed a MAC ID 00:21:6A:3F:17:5A (or essentially random numbers in the mac-d format) in the packets automatically transmitted. 
+enables the TX_Neighbor robot to embed a MAC ID 00:21:6A:3F:17:5A in the packets automatically transmitted. 
 
 Note: Please make the above changes in all robots on which the driver is installed. 
 
@@ -76,7 +86,6 @@ make -C WSR-Toolbox-linux-80211n-csitool-supplementary/netlink
 Load the dirvers and pass the required channel and bandwidth as parameters by running the setup script
 ```
 cd ~
-chmod +x ~/WSR-WifiDriver/setup.sh
 sudo ./WSR-WifiDriver/setup.sh <channel> <bandwidth>
 ```
 e.g
