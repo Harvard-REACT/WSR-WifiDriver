@@ -7,7 +7,7 @@ The driver requires Ubuntu 16.04 and SBC which has a mpcie slot to connect the I
 
 - [x] UP Squared Board (OS installation steps [here](https://github.com/up-board/up-community/wiki/Ubuntu_16.04)). Check Specs [here](https://up-shop.org/up-squared-series.html)
 - [x] Intel Apollo Lake N4200 (Same OS installation steps as above). Check specs [here](https://www.onlogic.com/epm163/)
-- [ ] Intel NUC8i3BEH (Generic Ubuntu 16.04 installation). Check base specs [here](https://www.intel.com/content/www/us/en/products/sku/126150/intel-nuc-kit-nuc8i3beh/specifications.html)
+- [x] Intel NUC8i3BEH (Generic Ubuntu 16.04 installation). Check base specs [here](https://www.intel.com/content/www/us/en/products/sku/126150/intel-nuc-kit-nuc8i3beh/specifications.html)
 
 ## Modified Driver and Firmware Setup Steps
 
@@ -122,7 +122,7 @@ make -j $cpuCores
 sudo make install
 ```
 
-3. Change the source MAC address in random_packet (during packet injection) to the robot's MAC address.
+3. (THIS NEEDS TO BE UPDATED) Change the source MAC address in random_packet (during packet injection) to the robot's MAC address.
 
 ```
 vim ~/WSR-Toolbox-linux-80211n-csitool-supplementary/linux-80211n-csitool-supplementary/injection/random_packets.c
@@ -192,7 +192,7 @@ and if its a TX_Neighbor robot, then use the field input_TX_channel_csi_fn. e.g
 ```
 
 
-## Edimax driver installation
+## Edimax driver installation (REMOVE)
 1. Download the official driver for 4.15 kernel
 2. unzip and enter the folder
 3. run 'sudo make -j4'
