@@ -86,11 +86,11 @@ make -C WSR-Toolbox-linux-80211n-csitool-supplementary/netlink
 Load the dirvers and pass the required channel and bandwidth as parameters by running the setup script
 ```
 cd ~
-sudo ./WSR-WifiDriver/setup.sh <channel> <bandwidth>
+sudo ./WSR-WifiDriver/setup.sh <network interface> <channel> <bandwidth>
 ```
 e.g
 ```
-sudo ./WSR-WifiDriver/setup.sh 108 HT20
+sudo ./WSR-WifiDriver/setup.sh wlp1s0 108 HT20
 ```
 To verify that the network interface has been set to monitor mode, the following should be the output when running iwconfig
 
