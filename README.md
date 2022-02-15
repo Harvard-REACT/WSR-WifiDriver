@@ -30,63 +30,24 @@ chmod +x WSR-WifiDriver/env_setup_1.sh WSR-WifiDriver/env_setup_2.sh WSR-WifiDri
 
 2. Run the first environement setup script
 ```
-./WSR-WifiDriver/env_setup_1.sh <name of intel 5300 network interface> 
-
-e.g. 
-./WSR-WifiDriver/env_setup_1.sh wlp59s0
+./WSR-WifiDriver/env_setup_1.sh 
 ```
 This should show the Intel 5300 wifi card as 'device not managed' after clicking the Wifi icon.
 
-3. MAC address setup to enable robot packet identification
-Change the MAC address in the iwlwifi/dvm/rx.c on line 44 which is the special_packet variable. (use any text editor)
 
-Change the sub-string 930-935 from 0xff to intended MAC address as source MAC address (obtained for the network interface using ifconfig).
-```
-vim ~/WSR-WifiDriver/iwlwifi/dvm/rx.c
-```
-
-e.g Setting the value to
-```
- 930     skb->data[16] = 0x0;
- 931     skb->data[17] = 0x21;
- 932     skb->data[18] = 0x6a;
- 933     skb->data[19] = 0x3f;
- 934     skb->data[20] = 0x17;
- 935     skb->data[21] = 0x5a; 
-``` 
-enables the TX_Neighbor robot to embed a MAC ID 00:21:6A:3F:17:5A in the packets automatically transmitted. 
-
-Note: Please make the above changes in all robots on which the driver is installed. 
-
-4. Compile the drivers
-```
-cd ~
-cpuCores=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'`
-sudo make -j $cpuCores -C /lib/modules/$(uname -r)/build M=~/WSR-WifiDriver/iwlwifi/ modules
-```
-
-5. Clone the modified linux-80211n-csitool-supplementary
-```
-git clone https://github.com/Harvard-REACT/WSR-Toolbox-linux-80211n-csitool-supplementary.git
-```
-
-6. Run the second environement setup script
+3. Run the second environement setup script
 ```
 ./WSR-WifiDriver/env_setup_2.sh
 ```
 
-7. Build userspace csi data logging tool as per step 4 in [Linux 802.11n CSI Tool installation instructions](http://dhalperi.github.io/linux-80211n-csitool/installation.html) to install the modified firmware
-```
-cd ~
-make -C WSR-Toolbox-linux-80211n-csitool-supplementary/netlink
-```
 
 ## Verify drivers are working
 
 Load the dirvers and pass the required channel and bandwidth as parameters by running the setup script
 ```
 cd ~
-sudo ./WSR-WifiDriver/setup.sh <network interface> <channel> <bandwidth>
+export csi_interface=$(ls /sys/class/net/ | grep wlp)
+sudo ./WSR-WifiDriver/setup.sh $csi_interface <channel> <bandwidth>
 ```
 e.g
 ```
@@ -115,14 +76,8 @@ wlp1s0    IEEE 802.11  Mode:Monitor  Frequency:5.54 GHz  Tx-Power=15 dBm
 
 ## Setup of packet injection (Reference [Packet Injection](https://github.com/dhalperi/linux-80211n-csitool-supplementary/tree/master/injection))
 
-1. compile LORCONv1
-```
-cd lorcon-old
-make -j $cpuCores
-sudo make install
-```
 
-3. (THIS NEEDS TO BE UPDATED) Change the source MAC address in random_packet (during packet injection) to the robot's MAC address.
+1. (THIS NEEDS TO BE UPDATED) Change the source MAC address in random_packet (during packet injection) to the robot's MAC address.
 
 ```
 vim ~/WSR-Toolbox-linux-80211n-csitool-supplementary/linux-80211n-csitool-supplementary/injection/random_packets.c
