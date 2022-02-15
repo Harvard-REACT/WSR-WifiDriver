@@ -1,4 +1,3 @@
-#!/bin/sh
 
 set -e
 
@@ -9,14 +8,14 @@ csi_interface=$(ls /sys/class/net/ | grep wlp)
 echo iface $csi_interface inet manual | sudo tee -a /etc/network/interfaces
 sudo service network-manager restart
 
-sudo cp /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/iwlwifi.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/iwlwifi.ko.bak
+#sudo mv /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/iwlwifi.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/iwlwifi.ko.bak
 
-sudo cp /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/mvm/iwlmvm.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/mvm/iwlmvm.ko.bak
+#sudo mv /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/mvm/iwlmvm.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/mvm/iwlmvm.ko.bak
 
-sudo cp /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/dvm/iwldvm.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/dvm/iwldvm.ko.bak
+#sudo mv /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/dvm/iwldvm.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/dvm/iwldvm.ko.bak
 
 cpuCores=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'`
-sudo make -j $cpuCores -C /lib/modules/$(uname -r)/build M=~/WSR-WifiDriver/iwlwifi/ modules
+sudo make  -C /lib/modules/$(uname -r)/build M=~/WSR-WifiDriver/iwlwifi/ modules
 
 sudo cp ~/WSR-WifiDriver/iwlwifi/iwlwifi.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/intel/iwlwifi/
 
@@ -26,7 +25,10 @@ sudo cp ~/WSR-WifiDriver/iwlwifi/mvm/iwlmvm.ko /lib/modules/$(uname -r)/kernel/d
 sudo depmod
 
 cd ~
+if [! -d "~/WSR-Toolbox-linux-80211n-csitool-supplementary"]
+then
 git clone https://github.com/Harvard-REACT/WSR-Toolbox-linux-80211n-csitool-supplementary.git
+fi
 
 STR=$((ls -t1 /lib/firmware/*.orig |  head -n 1) 2>&1)
 SUB='cannot'
