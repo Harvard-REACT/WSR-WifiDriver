@@ -927,12 +927,12 @@ void check_and_send_ack(struct iwl_priv *priv, unsigned char* datain, int lenin)
 
     //memcpy((char*)skb->data, (char*)special_packet, special_packet_length);    
     memcpy((char*)skb->data, (char*)datain, lenin);    
-    skb->data[16] = 0x0;
-    skb->data[17] = 0x21;
-    skb->data[18] = 0x6a;
-    skb->data[19] = 0x3f;
-    skb->data[20] = 0x17;
-    skb->data[21] = 0x5a;
+    skb->data[16] = priv->addresses[0].addr[0];
+    skb->data[17] = priv->addresses[0].addr[1];
+    skb->data[18] = priv->addresses[0].addr[2];
+    skb->data[19] = priv->addresses[0].addr[3];
+    skb->data[20] = priv->addresses[0].addr[4];
+    skb->data[21] = priv->addresses[0].addr[5];
 
 
 /*for(j=0; j<lenin+1; ++j) {
