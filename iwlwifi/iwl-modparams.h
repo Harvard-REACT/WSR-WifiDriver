@@ -123,12 +123,14 @@ enum iwl_uapsd_disable {
  * @fw_monitor: allow to use firmware monitor
  * @disable_11ac: disable VHT capabilities, default = false.
  */
+//Weiying
 struct iwl_mod_params {
 	int swcrypto;
 	unsigned int disable_11n;
 	int amsdu_size;
 	bool fw_restart;
 	int connector_log;
+	int ack_len;
 	bool bt_coex_active;
 	int led_mode;
 	bool power_save;

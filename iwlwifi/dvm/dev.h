@@ -877,6 +877,7 @@ struct iwl_priv {
 #endif /* CONFIG_IWLWIFI_DEBUGFS */
 //Weiying
 u32 connector_log;
+u32 ack_len;
 	int last_rx_noise;
 	s8 last_rx_noiseA;
 	s8 last_rx_noiseB;

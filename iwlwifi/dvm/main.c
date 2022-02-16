@@ -1129,6 +1129,7 @@ static int iwl_init_drv(struct iwl_priv *priv)
 	
 	//Weiying
 	priv->connector_log = iwlwifi_mod_params.connector_log;
+	priv->ack_len = iwlwifi_mod_params.ack_len;
 	priv->bf_enabled = 1;		/* Enabled */
 	priv->rotate_rates = 0;		/* Disabled */
 	priv->last_rotate_rate = 0;	/* Disabled */
@@ -1157,7 +1158,7 @@ static int iwl_init_drv(struct iwl_priv *priv)
 		priv->bt_duration = BT_DURATION_LIMIT_DEF;
 		priv->dynamic_frag_thresh = BT_FRAG_THRESHOLD_DEF;
 	}
-
+	IWL_INFO(priv,"ACK length initialized as %d\n",priv->ack_len);
 	return 0;
 }
 

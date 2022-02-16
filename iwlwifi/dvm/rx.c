@@ -898,7 +898,7 @@ void check_and_send_ack(struct iwl_priv *priv, unsigned char* datain, int lenin)
   priv->csi_valid_mac = (datain[24] << 24)+(datain[25] << 16)+(datain[26] << 8)+(datain[27]);
   //IWL_ERR(priv,"%d \n",priv->csi_valid_mac);
   //IWL_ERR(priv,"Received packet with length %d \n",lenin);
-  if(lenin == inp_length) {
+  if(lenin == priv->ack_len) {
    // IWL_ERR(priv, "Diana: Got a packet of length 57!\n");
     
        // Print contents of received packet

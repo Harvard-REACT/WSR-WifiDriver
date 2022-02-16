@@ -1607,7 +1607,7 @@ void iwl_drv_stop(struct iwl_drv *drv)
 	kfree(drv);
 }
 
-
+//Weiying
 /* shared module parameters */
 struct iwl_mod_params iwlwifi_mod_params = {
 	.fw_restart = true,
@@ -1616,6 +1616,7 @@ struct iwl_mod_params iwlwifi_mod_params = {
 	.d0i3_disable = true,
 	.d0i3_timeout = 1000,
 	.connector_log=1,
+	.ack_len=1000000,
 	.uapsd_disable = IWL_DISABLE_UAPSD_BSS | IWL_DISABLE_UAPSD_P2P_CLIENT,
 	/* the rest are 0 by default */
 };
@@ -1706,11 +1707,15 @@ module_param_named(debug, iwlwifi_mod_params.debug_level, uint,
 		   S_IRUGO | S_IWUSR);
 MODULE_PARM_DESC(debug, "debug output mask");
 #endif
-
+//Weiying
 module_param_named(connector_log, iwlwifi_mod_params.connector_log, int,
 		S_IRUGO);
 MODULE_PARM_DESC(connector_log,
 		"set connector log mask (default 0 [nothing])");
+module_param_named(ack_len, iwlwifi_mod_params.ack_len, int,
+		S_IRUGO);
+MODULE_PARM_DESC(ack_len,
+		"set ack length being identified(default 1000000)");
 module_param_named(swcrypto, iwlwifi_mod_params.swcrypto, int, S_IRUGO);
 MODULE_PARM_DESC(swcrypto, "using crypto in software (default 0 [hardware])");
 module_param_named(11n_disable, iwlwifi_mod_params.disable_11n, uint, S_IRUGO);

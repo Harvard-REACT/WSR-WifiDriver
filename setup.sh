@@ -4,10 +4,19 @@ sudo modprobe -r iwldvm
 sudo modprobe -r iwlwifi mac80211 cfg80211
 echo "Loading iwlwifi driver with csi data collection enabled"
 echo "Configuring interface ${intfac}"
-sudo modprobe iwlwifi connector_log=0x1
+re='^[0-9]+$'
+if [ "$#" -ge 1 ] &&  [[ $1 =~ $re ]]; then
+        echo "Manually set ack_len $1"
+        ack_length=$1
+else
+	echo "Using default ack_len 29"
+        ack_length=29
+fi
+
+sudo modprobe iwlwifi connector_log=0x1 ack_len=$ack_length
 while [ $? -ne 0 ]
 do
-        modprobe iwlwifi connector_log=0x1
+        modprobe iwlwifi connector_log=0x1 ack_len=$ack_length
 done
 echo "Driver loaded successfully"
 
@@ -35,14 +44,14 @@ sudo ifconfig mon0 up
 
 echo "Monitor mode interface is up"
 
-if [ "$#" -ne 2 ]; then
+if [ "$#" -ne 3 ]; then
         echo "Going to use default settings: channel = 104, bandwidth = HT20"
         chn=104
         bw=HT20
 else
-	echo "Manually set channel = $chn, bandwidth $bw"
-        chn=$1
-        bw=$2
+        chn=$2
+        bw=$3
+        echo "Manually set channel = $chn, bandwidth $bw"
 fi
 
 sudo iw $intfac set channel $chn $bw
