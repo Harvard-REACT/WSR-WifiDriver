@@ -4,6 +4,7 @@ set -e
 sudo apt-get update 
 sudo apt-get install gcc make linux-headers-$(uname -r) git-core
 sudo apt-get install iw vim
+#Assumpe the auto-generated interface name starting with wlp.
 csi_interface=$(ls /sys/class/net/ | grep wlp)
 echo iface $csi_interface inet manual | sudo tee -a /etc/network/interfaces
 sudo service network-manager restart
@@ -25,7 +26,7 @@ sudo cp ~/WSR-WifiDriver/iwlwifi/mvm/iwlmvm.ko /lib/modules/$(uname -r)/kernel/d
 sudo depmod
 
 cd ~
-if [! -d "~/WSR-Toolbox-linux-80211n-csitool-supplementary"]
+if [ ! -d "$HOME/WSR-Toolbox-linux-80211n-csitool-supplementary" ]
 then
 git clone https://github.com/Harvard-REACT/WSR-Toolbox-linux-80211n-csitool-supplementary.git
 fi

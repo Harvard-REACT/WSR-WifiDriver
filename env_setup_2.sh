@@ -5,11 +5,11 @@ cd ~
 cpuCores=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'`
 
 make -C WSR-Toolbox-linux-80211n-csitool-supplementary/netlink
-if [! -d "~/lorcon-old"]
+if [ ! -d "~/lorcon-old" ]
 then
 git clone https://github.com/dhalperi/lorcon-old.git
 fi
-cd ~/lorcon-old
+cd $HOME/lorcon-old
 make -j $cpuCores
 sudo make install
 
