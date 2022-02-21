@@ -5,7 +5,7 @@ cd ~
 cpuCores=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'`
 
 make -C WSR-Toolbox-linux-80211n-csitool-supplementary/netlink
-if [ ! -d "~/lorcon-old" ]
+if [ ! -d "${HOME}/lorcon-old" ]
 then
 git clone https://github.com/dhalperi/lorcon-old.git
 fi
