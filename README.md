@@ -149,11 +149,6 @@ and if its a TX_Neighbor robot, then use the field input_TX_channel_csi_fn. e.g
 ```
 
 
-## Edimax driver installation (REMOVE)
-1. Download the official driver for 4.15 kernel
-2. unzip and enter the folder
-3. run 'sudo make -j4'
-4. run 'sudo make install'
 
 
 
