@@ -25,7 +25,7 @@ Make sure that the Intel 5300 WiFi card's wifi interface is visible after clicki
 Clone this repository in home directory and update script permissions
 ```
 git clone https://github.com/Harvard-REACT/WSR-WifiDriver
-chmod +x WSR-WifiDriver/env_setup_1.sh WSR-WifiDriver/env_setup_2.sh WSR-WifiDriver/setup.sh
+chmod +x WSR-WifiDriver/*.sh
 ```
 
 2. Run the first environement setup script
@@ -46,13 +46,15 @@ This should show the Intel 5300 wifi card as 'device not managed' after clicking
 Load the dirvers and pass the required channel and bandwidth as parameters by running the setup script
 ```
 cd ~
-export csi_interface=$(ls /sys/class/net/ | grep wlp)
-sudo ./WSR-WifiDriver/setup.sh $csi_interface <channel> <bandwidth>
+sudo ./WSR-WifiDriver/setup.sh <packet-length> <channel> <bandwidth>
 ```
 e.g
 ```
-sudo ./WSR-WifiDriver/setup.sh wlp1s0 108 HT20
+sudo ./WSR-WifiDriver/setup.sh 57 108 HT20
 ```
+
+When the drivers are loaded on the transmitting robot, it uses the packet-length as an identifier to decide whether to send backward-packets or not.
+
 To verify that the network interface has been set to monitor mode, the following should be the output when running iwconfig
 
 ```
