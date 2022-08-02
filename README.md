@@ -53,7 +53,7 @@ e.g
 sudo ./WSR-WifiDriver/setup.sh 57 108 HT20
 ```
 
-When the drivers are loaded on the transmitting robot, it uses the packet-length as an identifier to decide whether to send backward-packets or not. The packet-length value starts from 57 and is updated in increments of 2 i.e 57, 59, 61 etc. Each robot in the system should have a unique packet-length.
+When the drivers are loaded on the transmitting robot, it uses the packet-length as an identifier to decide whether to send [backward-packets](https://github.com/Harvard-REACT/WSR-Toolbox/wiki/Terminology#phase-correction-using-forward-backward-packets) or not. The packet-length value starts from 57 and is updated in increments of 2 i.e 57, 59, 61 etc. Each robot in the system should have a unique packet-length when using the [forward-backward channel method for cancelling CFO](https://github.com/Harvard-REACT/WSR-Toolbox/wiki/Terminology#phase-correction-using-forward-backward-packets).
 
 To verify that the network interface has been set to monitor mode, the following should be the output when running iwconfig
 
