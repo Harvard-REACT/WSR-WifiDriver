@@ -87,9 +87,9 @@ cd ~
 sudo ./WSR-WifiDriver/setup.sh 57 108 HT20
 ```
 
-2. To log CSI data to a file
+2. Log CSI data for the packets broadcasted by RX to a file
 ```
-sudo ~/WSR-Toolbox-linux-80211n-csitool-supplementary/netlink/log_to_file csi.dat
+sudo ~/WSR-Toolbox-linux-80211n-csitool-supplementary/netlink/log_to_file csi_tx.dat
 ```
 
 ### On the RX robot (that need to obtain Angle-of-Arrival to its neighbors) start packet broadcasting
@@ -101,7 +101,12 @@ sudo ./WSR-WifiDriver/setup.sh 59 108 HT20
 ```
 Note that the packet length (e.g. 59) is checked by the driver when only sending the backward packets. Ensure that the packet length on each robot is unique. 
 
-2. Start packet broadcasting.
+2. To log CSI data for the backward packets that will be sent by TX 
+```
+sudo ~/WSR-Toolbox-linux-80211n-csitool-supplementary/netlink/log_to_file csi_rx.dat
+```
+
+3. Start packet broadcasting.
 ```
 sudo ./WSR-Toolbox-linux-80211n-csitool-supplementary/injection/random_packets <total_packets to send> <packet_size_of_TX> 1 <frequency>
 ```
@@ -112,8 +117,6 @@ e.g. To send 10000 packets, each of size 57 with 1000 packets sent every 100 ms
 ```
 sudo ./linux-80211n-csitool-supplementary/injection/random_packets 100000 57 1 1000
 ```
-
-
 
 ## Updating MAC IDs in the WSR Toolbox config files
 For this step, the [WSR-Toolbox-cpp](https://github.com/Harvard-REACT/WSR-Toolbox-cpp) needs to be installed.
