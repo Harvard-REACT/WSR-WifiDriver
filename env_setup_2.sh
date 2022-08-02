@@ -14,7 +14,7 @@ make -j $cpuCores
 sudo make install
 
 cd ~
-make -C WSR-Toolbox-linux-80211n-csitool-supplementary/injection_bak
+make -C WSR-Toolbox-linux-80211n-csitool-supplementary/injection
 
 
 echo "Setup completed."
