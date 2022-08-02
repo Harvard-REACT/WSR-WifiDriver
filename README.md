@@ -76,54 +76,44 @@ wlp1s0    IEEE 802.11  Mode:Monitor  Frequency:5.54 GHz  Tx-Power=15 dBm
 
 ```
 
-## Setup of packet injection (Reference [Packet Injection](https://github.com/dhalperi/linux-80211n-csitool-supplementary/tree/master/injection))
-
-
-1. (THIS NEEDS TO BE UPDATED) Change the source MAC address in random_packet (during packet injection) to the robot's MAC address.
-
-```
-vim ~/WSR-Toolbox-linux-80211n-csitool-supplementary/linux-80211n-csitool-supplementary/injection/random_packets.c
-```
-
-In file random_packet.c, modify the MAC addres on line 103 with corresponding address that was used in rx.c (Step 3 in 'Modified Driver and Firmware Setup').
-
-4. Compile the packets injection code (make sure that Step 6 of previous section is completed
-```
-cd ~
-make -C WSR-Toolbox-linux-80211n-csitool-supplementary/injection
-```
 
 ## Collecting CSI data packets
-### On the Transmitting robot start packet transmission
+Before continuing with the next steps, ensure that the driver has been loaded on all the robots (signal receivers and transmitters) are using the same WiFi channel.
 
-1. Load the network interface and set to monitor mode, using a channel (else the following [issue](https://github.com/dhalperi/linux-80211n-csitool-supplementary/issues/132) will be seen
-```
-cd ~
-sudo ./WSR-WifiDriver/setup.sh 108 HT20
-```
-
-2. Start packet transmission
-```
-sudo ./WSR-Toolbox-linux-80211n-csitool-supplementary/injection/random_packets <total_packets to send> <packet_size> 1 <frequency>
-```
-
-e.g. To send 10000 packets, each of size 29 with 1000 packets sent every 100 ms
-
-```
-sudo ./linux-80211n-csitool-supplementary/injection/random_packets 100000 29 1 1000
-```
-
-### On receiving robot
+### On TX robot (robot in the neighborhood that will transmit backward packets)
 1. Load the network interface (using the same channel) and set to monitor mode
 ```
 cd ~
-sudo ./WSR-WifiDriver/setup.sh 108 HT20
+sudo ./WSR-WifiDriver/setup.sh 57 108 HT20
 ```
 
 2. To log CSI data to a file
 ```
 sudo ~/WSR-Toolbox-linux-80211n-csitool-supplementary/netlink/log_to_file csi.dat
 ```
+
+### On the RX robot (that need to obtain Angle-of-Arrival to its neighbors) start packet broadcasting
+
+1. Load the network interface and set to monitor mode, using a channel (else the following [issue](https://github.com/dhalperi/linux-80211n-csitool-supplementary/issues/132) will be seen
+```
+cd ~
+sudo ./WSR-WifiDriver/setup.sh 59 108 HT20
+```
+Note that the packet length (e.g. 59) is checked by the driver when only sending the backward packets. Ensure that the packet length on each robot is unique. 
+
+2. Start packet broadcasting.
+```
+sudo ./WSR-Toolbox-linux-80211n-csitool-supplementary/injection/random_packets <total_packets to send> <packet_size_of_TX> 1 <frequency>
+```
+If there are multiple neighboring robots, the packets of varying lengths (corresponding to different robots) are iteratively broadcasted. To increase the number of robots, please update the code in [random_packets.c](https://github.com/Harvard-REACT/WSR-Toolbox-linux-80211n-csitool-supplementary/blob/main/injection/random_packets.c)  accordingly.
+
+e.g. To send 10000 packets, each of size 57 with 1000 packets sent every 100 ms
+
+```
+sudo ./linux-80211n-csitool-supplementary/injection/random_packets 100000 57 1 1000
+```
+
+
 
 ## Updating MAC IDs in the WSR Toolbox config files
 For this step, the [WSR-Toolbox-cpp](https://github.com/Harvard-REACT/WSR-Toolbox-cpp) needs to be installed.
