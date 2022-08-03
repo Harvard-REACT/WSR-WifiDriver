@@ -121,27 +121,32 @@ sudo ./linux-80211n-csitool-supplementary/injection/random_packets 100000 57 1 1
 
 ## Updating MAC IDs in the WSR Toolbox config files
 For this step, the [WSR-Toolbox-cpp](https://github.com/Harvard-REACT/WSR-Toolbox-cpp) needs to be installed.
+Note that you the previous steps assume your csi files are generated in the home directory. Edit the config_3D_SAR.json file in WSR-Toolbox-cpp config sub-folder.
 
-1. Add the MAC_ID in the config file for the robot. If its a RX_SAR_robot then use the field MAC_ID :
+1.For the csi data of RX robot update the input_RX_channel_csi_fn:
 ```
-    "MAC_ID":{
-        "desc":"MAC ID of RX_SAR robot",
-        "value":"00:21:6A:C5:FC:0"
+    "input_RX_channel_csi_fn":{
+        "desc":"Reverse channel csi File stored on the RX robot which is performing 3D SAR",
+        "value":{           
+            "mac_id":"00:21:6A:53:89:D2",
+            "csi_fn":"csi_rx.dat"
+        }
     },
 ``` 
 
-and if its a TX_Neighbor robot, then use the field input_TX_channel_csi_fn. e.g
+for any TX robot, use the field input_TX_channel_csi_fn. e.g
 ```
 "input_TX_channel_csi_fn":{
         "desc":"Forward channel csi File for each of the neighboring TX robots",
         "value":{
             "tx_0":{
                 "mac_id":"00:16:EA:12:34:56",
-                "csi_fn":"/REACT-Projects/WSR-Toolbox-cpp/data/LOS_2D_1_RX_1_TX_RX_P0_TX_P1/2D_TX_dataset_csi_rx_tx/csi_tx_2021-03-04_154912.dat"
+                "csi_fn":"csi_tx"
             },
         }
 ```
 
+Follow these steps for [testing CSI data](https://github.com/Harvard-REACT/WSR-Toolbox-cpp#test-sample-csi-data-files) and use this script for [visualizing the signal phase output](https://github.com/Harvard-REACT/WSR-Toolbox-cpp#visualization).
 
 
 
