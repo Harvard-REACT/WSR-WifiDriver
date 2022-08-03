@@ -24,6 +24,7 @@ Make sure that the Intel 5300 WiFi card's wifi interface is visible after clicki
 
 Clone this repository in home directory and update script permissions
 ```
+sudo apt update
 git clone https://github.com/Harvard-REACT/WSR-WifiDriver
 chmod +x WSR-WifiDriver/*.sh
 ```

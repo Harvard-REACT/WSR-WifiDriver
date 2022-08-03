@@ -2,7 +2,6 @@
 
 set -e
 
-sudo apt-get update 
 sudo apt-get install gcc make linux-headers-$(uname -r) git-core
 sudo apt-get install iw vim
 #Assumpe the auto-generated interface name starting with wlp.
