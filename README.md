@@ -113,10 +113,10 @@ sudo ./WSR-Toolbox-linux-80211n-csitool-supplementary/injection/random_packets <
 ```
 If there are multiple neighboring robots, the packets of varying lengths (corresponding to different robots) are iteratively broadcasted. To increase the number of robots, please update the code in [random_packets.c](https://github.com/Harvard-REACT/WSR-Toolbox-linux-80211n-csitool-supplementary/blob/main/injection/random_packets.c)  accordingly.
 
-e.g. To send 10000 packets, each of size 57 with 1000 packets sent every 100 ms
+e.g. To send 10000 packets, each of size 57, every 1 ms
 
 ```
-sudo ./linux-80211n-csitool-supplementary/injection/random_packets 100000 57 1 1000
+sudo ./WSR-Toolbox-linux-80211n-csitool-supplementary/injection/random_packets 100000 57 1 1000
 ```
 
 ## Updating MAC IDs in the WSR Toolbox config files
